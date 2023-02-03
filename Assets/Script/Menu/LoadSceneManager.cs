@@ -5,7 +5,8 @@ using UnityEngine.SceneManagement;
 public enum SceneName
 {
     Menu,
-    Game,
+    Selection,
+    RabbitPress,
     MemoryGame,
     Quit
 }
