@@ -3,22 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FooPressSystem : MonoBehaviour
+public class PressSystem : MonoBehaviour
 {
-    public int pressCount;
-    private List<KeyCode> keys;
     [SerializeField] private float changeKeyRate;
     [SerializeField] private int keyLimit;
-    [SerializeField] private List<Sprite> keyImage;
-
     [SerializeField] private KeyCode key;
+    [SerializeField] private List<Sprite> keyImage;
+    [SerializeField] private List<KeyCode> keys;
+    [HideInInspector ]public int pressCount;
+    
     private KeyCode keyBefore;
-
-    void Start()
-    {
-        keys = new List<KeyCode>() { KeyCode.UpArrow, KeyCode.DownArrow, KeyCode.LeftArrow, KeyCode.RightArrow };
-    }
-
 
     void Update()
     {

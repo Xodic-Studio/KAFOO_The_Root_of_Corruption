@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FooProgressBar : MonoBehaviour
+public class ProgressBar : MonoBehaviour
 {
-    private FooPressSystem fooPressSystem;
+    [SerializeField] private PressSystem button;
     [SerializeField] private int pressGoal;
     private Slider slider;
     void Start()
     {
-        fooPressSystem = GameObject.Find("FooButton").GetComponent<FooPressSystem>();
         slider = GetComponent<Slider>();
         slider.maxValue = pressGoal;
     }
@@ -18,6 +17,6 @@ public class FooProgressBar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        slider.value = fooPressSystem.pressCount;
+        slider.value = button.pressCount;
     }
 }
