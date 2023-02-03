@@ -13,11 +13,12 @@ public class TimeSystem : MonoBehaviour
      void Start()
      {
          timeText = GetComponent<TextMeshProUGUI>();
+         timeLeft = timeSpan;
      }
 
      void Update()
      {
-         timeLeft = timeSpan - Time.deltaTime;
+         timeLeft -= Time.deltaTime;
          timeLeft = Mathf.Clamp(timeLeft, 0, timeSpan);
 
          timeText.text = $"Time Left : {timeLeft:F0}";
