@@ -20,6 +20,7 @@ public class MemoryGameSystem : MonoBehaviour
     private List<int> userSequence = new List<int>();
     [SerializeField] private bool allowInput = false;
     private static readonly int PlayFeedback = Animator.StringToHash("PlayFeedback");
+    private static readonly int PlayFeedbackTrigger = Animator.StringToHash("PlayFeedbackTrigger");
 
     // Start is called before the first frame update
     void Start()
@@ -106,7 +107,7 @@ public class MemoryGameSystem : MonoBehaviour
 
     void ButtonFeedback(int index)
     {
-        memoryAnimators[index].SetTrigger("PlayFeedbackTrigger");
+        memoryAnimators[index].SetTrigger(PlayFeedbackTrigger);
     }
 
     IEnumerator PlaySequence(List<int> sequence)
@@ -114,7 +115,6 @@ public class MemoryGameSystem : MonoBehaviour
         allowInput = false;
         foreach (int i in sequence)
         {
-            ButtonFeedback(i);
             yield return new WaitForSeconds(sequenceInterval);
             ButtonFeedback(i);
         }
