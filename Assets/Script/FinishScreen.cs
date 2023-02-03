@@ -23,7 +23,8 @@ public class FinishScreen : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        playerWinText.text = MasterScript.Instance.p1Score > MasterScript.Instance.p2Score ? "Player 1 Win" : "Player 2 Win";
+        overallScoreText.text = MasterScript.Instance.p1Score + " : " + MasterScript.Instance.p2Score;
     }
 
     // Update is called once per frame

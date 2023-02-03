@@ -407,10 +407,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c3f90e2bb5724842a0104ef8c9a817f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 4
-  P1PressSystem: {fileID: 2001533963}
-  P2PressSystem: {fileID: 1797751807}
-  TimeSystem: {fileID: 698833638}
+  level: 1
+  p1PressSystem: {fileID: 2001533963}
+  p2PressSystem: {fileID: 1797751807}
+  timeSystem: {fileID: 698833638}
+  finishScreenPrefab: {fileID: 111461065495219332, guid: 9b9efb97bf5f6fd42adcb21e4f487de4, type: 3}
+  canvas: {fileID: 1837065159}
+  showed: 0
 --- !u!4 &338427859
 Transform:
   m_ObjectHideFlags: 0
@@ -634,10 +637,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 698833636}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4bfaaa6b9a3bd5428d7c49c9d859fac, type: 3}
+  m_Script: {fileID: 11500000, guid: e5cb41f415424f341afb4fd0eac5a614, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeSpan: 30
+  timeSpan: 90
   timeLeft: 0
 --- !u!114 &698833639
 MonoBehaviour:

@@ -1,16 +1,23 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 
 public class GameSystem : MonoBehaviour
 {
     public int level = 1;
-    [SerializeField] private PressSystem P1PressSystem;
-    [SerializeField] private PressSystem P2PressSystem;
-    [SerializeField] private TimeSystem TimeSystem;
+    [SerializeField] private PressSystem p1PressSystem;
+    [SerializeField] private PressSystem p2PressSystem;
+    [SerializeField] private TimeSystem timeSystem;
     
+    [Title("Finish Screen")]
+    [SerializeField] private GameObject finishScreenPrefab;
+    [SerializeField] private Canvas canvas;
+    [SerializeField] bool showed = false;
+
     private readonly Level _lv1 = new() {pressGoal = 100, keyLimit = 3, timeLimit = 30};
     private readonly Level _lv2 = new() {pressGoal = 120, keyLimit = 2, timeLimit = 45};
     private readonly Level _lv3 = new() {pressGoal = 150, keyLimit = 0, timeLimit = 60};
@@ -22,38 +29,38 @@ public class GameSystem : MonoBehaviour
         {
             case 1:
             {
-                P1PressSystem.pressGoal = _lv1.pressGoal;
-                P1PressSystem.SetKeyLimit(_lv1.keyLimit);
-                P2PressSystem.pressGoal = _lv1.pressGoal;
-                P2PressSystem.SetKeyLimit(_lv1.keyLimit);
-                TimeSystem.timeSpan = _lv1.timeLimit;
+                p1PressSystem.pressGoal = _lv1.pressGoal;
+                p1PressSystem.SetKeyLimit(_lv1.keyLimit);
+                p2PressSystem.pressGoal = _lv1.pressGoal;
+                p2PressSystem.SetKeyLimit(_lv1.keyLimit);
+                timeSystem.timeSpan = _lv1.timeLimit;
                 break;
             }
             case 2:
             {
-                P1PressSystem.pressGoal = _lv2.pressGoal;
-                P1PressSystem.SetKeyLimit(_lv2.keyLimit);
-                P2PressSystem.pressGoal = _lv2.pressGoal;
-                P2PressSystem.SetKeyLimit(_lv2.keyLimit);
-                TimeSystem.timeSpan = _lv2.timeLimit;
+                p1PressSystem.pressGoal = _lv2.pressGoal;
+                p1PressSystem.SetKeyLimit(_lv2.keyLimit);
+                p2PressSystem.pressGoal = _lv2.pressGoal;
+                p2PressSystem.SetKeyLimit(_lv2.keyLimit);
+                timeSystem.timeSpan = _lv2.timeLimit;
                 break;
             }
             case 3:
             {
-                P1PressSystem.pressGoal = _lv3.pressGoal;
-                P1PressSystem.SetKeyLimit(_lv3.keyLimit);
-                P2PressSystem.pressGoal = _lv3.pressGoal;
-                P2PressSystem.SetKeyLimit(_lv3.keyLimit);
-                TimeSystem.timeSpan = _lv3.timeLimit;
+                p1PressSystem.pressGoal = _lv3.pressGoal;
+                p1PressSystem.SetKeyLimit(_lv3.keyLimit);
+                p2PressSystem.pressGoal = _lv3.pressGoal;
+                p2PressSystem.SetKeyLimit(_lv3.keyLimit);
+                timeSystem.timeSpan = _lv3.timeLimit;
                 break;
             }
             case 4:
             {
-                P1PressSystem.pressGoal = _lv4.pressGoal;
-                P1PressSystem.SetKeyLimit(_lv4.keyLimit);
-                P2PressSystem.pressGoal = _lv4.pressGoal;
-                P2PressSystem.SetKeyLimit(_lv4.keyLimit);
-                TimeSystem.timeSpan = _lv4.timeLimit;
+                p1PressSystem.pressGoal = _lv4.pressGoal;
+                p1PressSystem.SetKeyLimit(_lv4.keyLimit);
+                p2PressSystem.pressGoal = _lv4.pressGoal;
+                p2PressSystem.SetKeyLimit(_lv4.keyLimit);
+                timeSystem.timeSpan = _lv4.timeLimit;
                 break;
             }
         }
@@ -61,30 +68,47 @@ public class GameSystem : MonoBehaviour
 
     void Update()
     {
-        CheckWin();
+        if (timeSystem.timeLeft <= 0 || p1PressSystem.pressCount >= p1PressSystem.pressGoal ||
+            p2PressSystem.pressCount >= p2PressSystem.pressGoal)
+        {
+            CheckWin();
+        }
+        
     }
 
     private void CheckWin()
     {
-        // End game condition
-        if (TimeSystem.timeLeft <= 0 ||
-            P1PressSystem.pressCount >= P1PressSystem.pressGoal ||
-            P2PressSystem.pressCount >= P2PressSystem.pressGoal)
+        if (!showed)
         {
+            GameObject finishScreen = Instantiate(finishScreenPrefab, canvas.transform);
+            FinishScreen finishScreenSystem = finishScreen.GetComponent<FinishScreen>();
+            // End game condition
             // P1 win
-            if (P1PressSystem.pressCount > P2PressSystem.pressCount)
+            if (p1PressSystem.pressCount > p2PressSystem.pressCount)
             {
+                MasterScript.Instance.AddScore(Player.Player1);
             }
             // P2 win
-            else if (P2PressSystem.pressCount > P1PressSystem.pressCount)
+            else if (p2PressSystem.pressCount > p1PressSystem.pressCount)
             {
+                MasterScript.Instance.AddScore(Player.Player2);
             }
             // No one win
             else
             {
-                
+                MasterScript.Instance.AddScore(Player.Player1);
+                MasterScript.Instance.AddScore(Player.Player2);
             }
+            
+            finishScreenSystem.ShowScreen();
+            showed = true;
+            Invoke(nameof(ToSelectScene),5f);
         }
+    }
+
+    void ToSelectScene()
+    {
+        LoadSceneManager.Instance.LoadScene(SceneName.Selection);
     }
 }
 
