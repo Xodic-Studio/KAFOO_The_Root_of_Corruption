@@ -7,30 +7,40 @@ using UnityEngine;
 
 public class MemoryGameSystem : MonoBehaviour
 {
-    public Image[] memorySprites;
-    private Animator[] memoryAnimators;
-    public float sequenceInterval = 1f;
-    public int playerNum = 1;
     //0 = w
     //1 = a
     //2 = s
     //3 = d
+    public MemoryScoreSystem memoryScoreSystem;
+    public Image[] memorySprites;
+    private Vector3[] memoryOriginalPositions;
+    private Animator[] memoryAnimators;
+    public int minSequenceLength, maxSequenceLength;
+    private int currentSequenceLength;
+    public int countToIncreseLength = 2;
+    private int playerCombo;
+    public float sequenceInterval = 1f;
+    public int playerNum = 1;
+    public bool swapAfterSequence = false;
     [SerializeField] private List<int> sequenceIndices = new List<int>();
     private List<KeyCode> playerControl = new List<KeyCode>();
     private List<int> userSequence = new List<int>();
     [SerializeField] private bool allowInput = false;
-    private static readonly int PlayFeedback = Animator.StringToHash("PlayFeedback");
-    private static readonly int PlayFeedbackTrigger = Animator.StringToHash("PlayFeedbackTrigger");
+    private static readonly int Correct = Animator.StringToHash("Correct");
+    private static readonly int Initial = Animator.StringToHash("Initial");
 
     // Start is called before the first frame update
     void Start()
     {
         memoryAnimators = new Animator[memorySprites.Length];
+        memoryOriginalPositions = new Vector3[memorySprites.Length];
         for (int i = 0; i < memorySprites.Length; i++)
         {
             memoryAnimators[i] = memorySprites[i].gameObject.GetComponent<Animator>();
+            memoryOriginalPositions[i] = memorySprites[i].transform.position;
         }
-        RandomSequence(sequenceIndices, 4);
+        currentSequenceLength = minSequenceLength;
+        RandomSequence(sequenceIndices, currentSequenceLength);
         StartCoroutine(PlaySequence(sequenceIndices));
         playerControl = playerNum == 1
             ? new List<KeyCode>() { KeyCode.W, KeyCode.A, KeyCode.S, KeyCode.D }
@@ -42,6 +52,7 @@ public class MemoryGameSystem : MonoBehaviour
     {
         UserInput();
         UserInputUp();
+        CheckCombo();
     }
 
     void UserInput()
@@ -52,26 +63,22 @@ public class MemoryGameSystem : MonoBehaviour
             if (Input.GetKeyDown(playerControl[0]))
             {
                 userSequence.Add(0);
-                InputCheck(sequenceIndices);
-                ButtonFeedback(0, true);
+                InputCheck(0, sequenceIndices);
             }
             else if (Input.GetKeyDown(playerControl[1]))
             {
                 userSequence.Add(1);
-                InputCheck(sequenceIndices);
-                ButtonFeedback(1, true);
+                InputCheck(1, sequenceIndices);
             }
             else if (Input.GetKeyDown(playerControl[2]))
             {
                 userSequence.Add(2);
-                InputCheck(sequenceIndices);
-                ButtonFeedback(2, true);
+                InputCheck(2, sequenceIndices);
             }
             else if (Input.GetKeyDown(playerControl[3]))
             {
                 userSequence.Add(3);
-                InputCheck(sequenceIndices);
-                ButtonFeedback(3, true);
+                InputCheck(3, sequenceIndices);
             }
         }
     }
@@ -80,34 +87,48 @@ public class MemoryGameSystem : MonoBehaviour
     {
         if (Input.GetKeyUp(playerControl[0]))
         {
-            InputCheck(sequenceIndices);
-            ButtonFeedback(0, false);
+            InputCheck(0, sequenceIndices);
+            ButtonFeedback(0, "Correct", false);
+            ButtonFeedback(0, "Wrong", false);
         }
         else if (Input.GetKeyUp(playerControl[1]))
         {
-            InputCheck(sequenceIndices);
-            ButtonFeedback(1, false);
+            InputCheck(1, sequenceIndices);
+            ButtonFeedback(1, "Correct", false);
+            ButtonFeedback(1, "Wrong", false);
         }
         else if (Input.GetKeyUp(playerControl[2]))
         {
-            InputCheck(sequenceIndices);
-            ButtonFeedback(2, false);
+            InputCheck(2, sequenceIndices);
+            ButtonFeedback(2, "Correct", false);
+            ButtonFeedback(2, "Wrong", false);
         }
         else if (Input.GetKeyUp(playerControl[3]))
         {
-            InputCheck(sequenceIndices);
-            ButtonFeedback(3, false);
+            InputCheck(3, sequenceIndices);
+            ButtonFeedback(3, "Correct", false);
+            ButtonFeedback(3, "Wrong", false);
         }
     }
 
-    void ButtonFeedback(int index, bool state)
+    void CheckCombo()
     {
-        memoryAnimators[index].SetBool(PlayFeedback, state);
+        if (playerCombo >= countToIncreseLength)
+        {
+            playerCombo = 0;
+            currentSequenceLength += 1;
+            currentSequenceLength = Mathf.Clamp(currentSequenceLength, minSequenceLength, maxSequenceLength);
+        }
+    }
+    
+    void ButtonFeedback(int index, string name, bool state)
+    {
+        memoryAnimators[index].SetBool(name, state);
     }
 
     void ButtonFeedback(int index)
     {
-        memoryAnimators[index].SetTrigger(PlayFeedbackTrigger);
+        memoryAnimators[index].SetTrigger(Initial);
     }
 
     IEnumerator PlaySequence(List<int> sequence)
@@ -115,12 +136,43 @@ public class MemoryGameSystem : MonoBehaviour
         allowInput = false;
         foreach (int i in sequence)
         {
-            yield return new WaitForSeconds(sequenceInterval);
             ButtonFeedback(i);
+            yield return new WaitForSeconds(sequenceInterval);
+        }
+        if (swapAfterSequence)
+        {
+            StartCoroutine(SwapPosition());
         }
         allowInput = true;
     }
 
+    IEnumerator SwapPosition()
+    {
+        List<int> randomList = new List<int> { 0, 1, 2, 3 };
+        for (int i = 0; i < memorySprites.Length; i++)
+        {
+            float maxTime = 0.1f;
+            float lerpTime = 0f;
+            int randomNum = randomList[Random.Range(0, randomList.Count)];
+            randomList.Remove(randomNum);
+            while (lerpTime <= maxTime)
+            {
+                memorySprites[i].transform.position = Vector3.Lerp(memorySprites[i].transform.position,
+                    memoryOriginalPositions[randomNum], lerpTime / maxTime);
+                lerpTime += Time.deltaTime;
+                yield return null;
+            }
+        } 
+    }
+
+    void ReturnToOriginal()
+    {
+        for (int i = 0; i < memorySprites.Length; i++)
+        {
+            memorySprites[i].transform.position = memoryOriginalPositions[i];
+        }
+    }
+    
     void RandomSequence(List<int> sequence, int sequenceLength)
     {
         sequence.Clear();
@@ -130,23 +182,36 @@ public class MemoryGameSystem : MonoBehaviour
         }
     }
 
-    void InputCheck(List<int> sequence)
+    void InputCheck(int buttonIndex, List<int> sequence)
     {
         if (CompareSequence(sequence, userSequence) == 0)
         {
             Debug.Log("wrong!!");
             userSequence.Clear();
+            ButtonFeedback(buttonIndex, "Wrong", true);
+            if (swapAfterSequence)
+            { 
+                ReturnToOriginal();
+            }
             StartCoroutine(PlaySequence(sequence));
         }
         else if (CompareSequence(sequence, userSequence) == 1)
         {
+            ButtonFeedback(buttonIndex, "Correct", true);
             Debug.Log("correct but input more!");
         }
         else
         {
             Debug.Log("All correct");
+            memoryScoreSystem.IncreaseScore(playerNum, 1);
             userSequence.Clear();
-            RandomSequence(sequenceIndices, 4);
+            ButtonFeedback(buttonIndex, "Correct", true);
+            playerCombo += 1;
+            RandomSequence(sequenceIndices, currentSequenceLength);
+            if (swapAfterSequence)
+            { 
+                ReturnToOriginal();
+            }
             StartCoroutine(PlaySequence(sequenceIndices));
         }
     }
