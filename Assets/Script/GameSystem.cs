@@ -61,13 +61,33 @@ public class GameSystem : MonoBehaviour
 
     void Update()
     {
-        if (TimeSystem.timeLeft <= 0)
+        CheckWin();
+    }
+
+    private void CheckWin()
+    {
+        // End game condition
+        if (TimeSystem.timeLeft <= 0 ||
+            P1PressSystem.pressCount >= P1PressSystem.pressGoal ||
+            P2PressSystem.pressCount >= P2PressSystem.pressGoal)
         {
-            level++;
-        } 
+            // P1 win
+            if (P1PressSystem.pressCount > P2PressSystem.pressCount)
+            {
+            }
+            // P2 win
+            else if (P2PressSystem.pressCount > P1PressSystem.pressCount)
+            {
+            }
+            // No one win
+            else
+            {
+            }
+        }
     }
 }
 
+    
 class Level {
     public int pressGoal;
     public int keyLimit;
