@@ -10,12 +10,13 @@ using UnityEngine.UI;
 public class Menu : MonoBehaviour
 {
     [SerializeField] private Button playButton;
+    [SerializeField] private SceneName SceneName;
     
     private void Start()
     {
         playButton.onClick.AddListener(delegate
         {
-            LoadSceneManager.Instance.LoadScene(SceneName.Game);
+            LoadSceneManager.Instance.LoadScene(this.SceneName);
         });
     }
 }

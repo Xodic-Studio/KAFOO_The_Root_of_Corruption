@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/RabbitPress.unity
     guid: 639e72eef3ccee0449cc6d5fab916e8a
+  - enabled: 1
+    path: Assets/Scenes/MemoryGame.unity
+    guid: cb25ef30f5bead040a1b1efdb83f5eb1
   m_configObjects: {}
