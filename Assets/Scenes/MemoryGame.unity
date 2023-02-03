@@ -731,7 +731,9 @@ MonoBehaviour:
   p2ScoreText: {fileID: 1713479782}
   p1Score: 0
   p2Score: 0
+  canvas: {fileID: 204591572}
   timeSystem: {fileID: 561266458}
+  finishScreenPrefab: {fileID: 111461065495219332, guid: 9b9efb97bf5f6fd42adcb21e4f487de4, type: 3}
 --- !u!4 &562037390
 Transform:
   m_ObjectHideFlags: 0

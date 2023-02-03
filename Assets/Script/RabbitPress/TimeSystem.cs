@@ -17,7 +17,7 @@ public class TimeSystem : MonoBehaviour
 
      void Update()
      {
-         timeLeft = timeSpan - Time.time;
+         timeLeft = timeSpan - Time.deltaTime;
          timeLeft = Mathf.Clamp(timeLeft, 0, timeSpan);
 
          timeText.text = $"Time Left : {timeLeft:F0}";

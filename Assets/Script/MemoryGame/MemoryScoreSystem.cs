@@ -6,9 +6,11 @@ using UnityEngine;
 public class MemoryScoreSystem : MonoBehaviour
 {
     public TextMeshProUGUI p1ScoreText, p2ScoreText;
-
+    private bool showed = false;
     [SerializeField] private int p1Score = 0, p2Score = 0;
+    [SerializeField] private Canvas canvas;
     public TimeSystem timeSystem;
+    public GameObject finishScreenPrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -27,18 +29,33 @@ public class MemoryScoreSystem : MonoBehaviour
 
     void CheckCondition()
     {
-        if (p1Score > p2Score)
+        if (!showed)
         {
-            Debug.Log("P1 Win");
+            GameObject finishScreen = Instantiate(finishScreenPrefab, canvas.transform);
+            FinishScreen finishScreenSystem = finishScreen.GetComponent<FinishScreen>();
+            if (p1Score > p2Score)
+            {
+                MasterScript.Instance.p1Score++;
+            }
+            else if (p1Score < p2Score)
+            {
+                MasterScript.Instance.p2Score++;
+            }
+            else if (p1Score == p2Score)
+            {
+                MasterScript.Instance.p1Score++;
+                MasterScript.Instance.p2Score++;
+            }
+            finishScreenSystem.ShowScreen();
+            showed = true;
+            Invoke(nameof(ToSelectScene),5);
         }
-        else if (p1Score < p2Score)
-        {
-            Debug.Log("P2 Win");
-        }
-        else if (p1Score == p2Score)
-        {
-            Debug.Log("Draw!!!");
-        }
+        
+    }
+    
+    void ToSelectScene()
+    {
+        LoadSceneManager.Instance.LoadScene(SceneName.Selection);
     }
 
     public void IncreaseScore(int playerNum, int increment)
