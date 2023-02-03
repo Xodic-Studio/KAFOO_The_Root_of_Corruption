@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class FahnafonProgressBar : MonoBehaviour
 {
-    private FahnafonPressSystem fahnafonPressSystem;
+    [SerializeField] private FahnafonPressSystem fahnafonPressSystem;
     [SerializeField] private int pressGoal;
     private Slider slider;
     void Start()

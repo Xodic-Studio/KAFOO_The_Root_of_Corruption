@@ -2,12 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using Random = System.Random;
 
 public class FooPressSystem : MonoBehaviour
 {
     public int pressCount;
-    private Random rnd;
     private List<KeyCode> keys;
     [SerializeField] private float changeKeyRate;
     [SerializeField] private int keyLimit;
@@ -19,33 +17,27 @@ public class FooPressSystem : MonoBehaviour
     void Start()
     {
         keys = new List<KeyCode>() { KeyCode.UpArrow, KeyCode.DownArrow, KeyCode.LeftArrow, KeyCode.RightArrow };
-        rnd = new Random();
     }
 
 
     void Update()
     {
+        
         if (Input.GetKeyDown(key))
         {
             GetComponent<Image>().color = Color.black;
             
             // change key & key sprite
-            if (rnd.Next(0, 100) < changeKeyRate)
+            if (Random.Range(0, 100) < changeKeyRate)
             {
-                while (true)
-                {
-                    Mathf.Lerp(0f,3f, keyLimit);
-           
-                    int randomKey = rnd.Next(0, keys.Count - keyLimit);
+                Mathf.Lerp(0f,3f, keyLimit);
 
-                    if (randomKey != keys.IndexOf(key) || keyLimit == keys.Count - 1)
-                    {
-                        keyBefore = key;
-                        key = keys[randomKey];
-                        GetComponent<Image>().sprite = keyImage[randomKey];
-                        break;
-                    }
+                while (CheckSameKey())
+                {
+                    Debug.Log("Random Same Key");
                 }
+                Debug.Log("Change Key");
+                    
             }
             pressCount++;
         }
@@ -54,5 +46,18 @@ public class FooPressSystem : MonoBehaviour
         {
             GetComponent<Image>().color = Color.white;
         }
+    }
+
+    private bool CheckSameKey()
+    {
+        int randomKeyIndex = Random.Range(0, keys.Count - keyLimit);
+        if (randomKeyIndex != keys.IndexOf(key) || keyLimit == keys.Count - 1)
+        {
+            keyBefore = key;
+            key = keys[randomKeyIndex];
+            GetComponent<Image>().sprite = keyImage[randomKeyIndex];
+            return false;
+        }
+        return true;
     }
 }

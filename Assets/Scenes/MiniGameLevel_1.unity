@@ -1111,8 +1111,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pressCount: 0
-  changeKeyRate: 10
-  keyLimit: 3
+  changeKeyRate: 20
+  keyLimit: 0
   keyImage:
   - {fileID: 21300000, guid: 938091e80a8762a468819e93e44e1fb1, type: 3}
   - {fileID: 21300000, guid: bf35dc207bc92984cb2f9a9c9a4088a4, type: 3}
@@ -1380,8 +1380,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pressCount: 0
-  changeKeyRate: 10
-  keyLimit: 3
+  changeKeyRate: 20
+  keyLimit: 0
   keyImage:
   - {fileID: 21300000, guid: 87e6cece6357a2d438f3b552c912a7e2, type: 3}
   - {fileID: 21300000, guid: 36182aad947dd174f9997d4a60fe9787, type: 3}
