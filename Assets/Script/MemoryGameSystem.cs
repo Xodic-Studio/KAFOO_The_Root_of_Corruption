@@ -149,7 +149,6 @@ public class MemoryGameSystem : MonoBehaviour
             RandomSequence(sequenceIndices, 4);
             StartCoroutine(PlaySequence(sequenceIndices));
         }
-        allowInput = true;
     }
 
     //0 = wrong
