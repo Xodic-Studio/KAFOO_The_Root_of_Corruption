@@ -4,17 +4,18 @@ using System.Collections.Generic;
 using UnityEditor.DeviceSimulation;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 
 public class Menu : MonoBehaviour
 {
-    public void Play()
+    [SerializeField] private Button playButton;
+    
+    private void Start()
     {
-        SceneManager.LoadScene("RabbitPress");
-    }
-
-    public void Quit()
-    {
-        Application.Quit();
+        playButton.onClick.AddListener(delegate
+        {
+            LoadSceneManager.Instance.LoadScene(SceneName.Game);
+        });
     }
 }
