@@ -6,12 +6,11 @@ using UnityEngine.UI;
 public class ProgressBar : MonoBehaviour
 {
     [SerializeField] private PressSystem button;
-    [SerializeField] private int pressGoal;
     private Slider slider;
     void Start()
     {
         slider = GetComponent<Slider>();
-        slider.maxValue = pressGoal;
+        slider.maxValue = button.pressGoal;
     }
 
     // Update is called once per frame

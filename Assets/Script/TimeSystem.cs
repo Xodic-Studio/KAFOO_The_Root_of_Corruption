@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class TimeSystem : MonoBehaviour
 {
-     [SerializeField] private float timeSpan = 30f;
+     public float timeSpan = 30f;
      [SerializeField] public float timeLeft;
      private TextMeshProUGUI timeText;
 

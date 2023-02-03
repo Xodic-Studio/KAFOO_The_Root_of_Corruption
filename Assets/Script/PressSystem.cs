@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class PressSystem : MonoBehaviour
 {
@@ -10,9 +12,16 @@ public class PressSystem : MonoBehaviour
     [SerializeField] private KeyCode key;
     [SerializeField] private List<Sprite> keyImage;
     [SerializeField] private List<KeyCode> keys;
-    [HideInInspector ]public int pressCount;
+    [SerializeField] public int pressGoal;
+    [HideInInspector] public int pressCount;
     
     private KeyCode keyBefore;
+    
+    public void SetKeyLimit(int limit)
+    {
+        math.clamp(limit, 0, keys.Count - 1);
+        keyLimit = limit;
+    }
 
     void Update()
     {
