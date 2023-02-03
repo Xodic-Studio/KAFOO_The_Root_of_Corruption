@@ -12,6 +12,7 @@ public class MemoryGameSystem : MonoBehaviour
     //2 = s
     //3 = d
     [SerializeField] private List<int> sequenceIndices = new List<int>();
+    private List<int> userSequence = new List<int>();
     private bool allowInput = false;
 
     // Start is called before the first frame update
@@ -24,7 +25,34 @@ public class MemoryGameSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (allowInput)
+        {
+            Debug.Log("Input NOW!!!");
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                userSequence.Add(0);
+                StartCoroutine(InputCheck(sequenceIndices));
+                allowInput = false;
+            }
+            else if (Input.GetKeyDown(KeyCode.A))
+            {
+                userSequence.Add(1);
+                StartCoroutine(InputCheck(sequenceIndices));
+                allowInput = false;
+            }
+            else if (Input.GetKeyDown(KeyCode.S))
+            {
+                userSequence.Add(2);
+                StartCoroutine(InputCheck(sequenceIndices));
+                allowInput = false;
+            }
+            else if (Input.GetKeyDown(KeyCode.D))
+            {
+                userSequence.Add(3);
+                StartCoroutine(InputCheck(sequenceIndices));
+                allowInput = false;
+            }
+        }
     }
 
     IEnumerator PlaySequence(List<int> sequence)
@@ -42,7 +70,6 @@ public class MemoryGameSystem : MonoBehaviour
             yield return new WaitForSeconds(1f);
         }
         allowInput = true;
-        StartCoroutine(InputCheck(sequenceIndices));
     }
 
     void RandomSequence(List<int> sequence, int sequenceLength)
@@ -55,60 +82,30 @@ public class MemoryGameSystem : MonoBehaviour
 
     IEnumerator InputCheck(List<int> sequence)
     {
-        bool wrongInput = false;
-        List<int> userSequence = new List<int>();
+        //bool wrongInput = false;
         while (true)
         {
-            while (true)
+            if (CompareSequence(sequence, userSequence) == 0)
             {
-                Debug.Log("Input NOW!!!");
-                if (Input.GetKeyDown(KeyCode.W))
-                {
-                    userSequence.Add(0);
-                    break;
-                }
-                else if (Input.GetKeyDown(KeyCode.A))
-                {
-                    userSequence.Add(1);
-                    break;
-                }
-                else if (Input.GetKeyDown(KeyCode.S))
-                {
-                    userSequence.Add(2);
-                    break;
-                }
-                else if (Input.GetKeyDown(KeyCode.D))
-                {
-                    userSequence.Add(3);
-                    break;
-                }
-
+                Debug.Log("wrong!!");
+                userSequence.Clear();
+                StartCoroutine(PlaySequence(sequence));
                 yield return null;
             }
-            while (true)
+            else if (CompareSequence(sequence, userSequence) == 1)
             {
-                if (CompareSequence(sequence, userSequence) == 0)
-                {
-                    Debug.Log("wrong!!");
-                    userSequence.Clear();
-                    StartCoroutine(PlaySequence(sequence));
-                    yield return null;
-                    //StartCoroutine(InputCheck(sequence));
-                }
-                else if (CompareSequence(sequence, userSequence) == 1)
-                {
-                    Debug.Log("correct but input more!");
-                    break;
-                }
-                else
-                {
-                    Debug.Log("All correct");
-                    yield break;
-                }
-                yield return null;
+                Debug.Log("correct but input more!");
+                break;
+            }
+            else
+            {
+                Debug.Log("All correct");
+                yield break;
             }
             yield return null;
         }
+        allowInput = true;
+        yield return null;
     }
 
     //0 = wrong
@@ -122,13 +119,13 @@ public class MemoryGameSystem : MonoBehaviour
             {
                 return 0;
             }
-            else
+            if (userSequence[i] == sequence[i])
             {
+                if (userSequence.Count == sequence.Count)
+                {
+                    return 2;
+                }
                 return 1;
-            }
-            if (userSequence.Count == sequence.Count)
-            {
-                return 2;
             }
         }
         return 1;
