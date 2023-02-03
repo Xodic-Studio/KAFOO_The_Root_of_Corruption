@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,7 +18,15 @@ public class PressSystem : MonoBehaviour
     [HideInInspector] public int pressCount;
     
     private KeyCode keyBefore;
-    
+    [SerializeField] private List<KeyCode> otherKey;
+    [SerializeField] bool pressAble = true;
+
+    private void Start()
+    {
+        otherKey = keys.ToList();
+        otherKey.Remove(key);
+    }
+
     public void SetKeyLimit(int limit)
     {
         math.clamp(limit, 0, keys.Count - 1);
@@ -25,7 +35,18 @@ public class PressSystem : MonoBehaviour
 
     void Update()
     {
-        
+        if(!pressAble) return;
+        foreach (var k in otherKey)
+        {
+            if (Input.GetKeyDown(k))
+            {
+                pressAble = false;
+                Invoke(nameof(TurnOnPress), 1f);
+                Debug.Log("Wrong Key");
+                GetComponent<Image>().color = Color.red;
+                return;
+            }
+        }
         if (Input.GetKeyDown(key))
         {
             GetComponent<Image>().color = Color.black;
@@ -51,13 +72,21 @@ public class PressSystem : MonoBehaviour
         }
     }
 
+    private void TurnOnPress()
+    {
+        pressAble = true;
+        GetComponent<Image>().color = Color.white;
+    }
+
     private bool CheckSameKey()
     {
         int randomKeyIndex = Random.Range(0, keys.Count - keyLimit);
         if (randomKeyIndex != keys.IndexOf(key) || keyLimit == keys.Count - 1)
         {
             keyBefore = key;
+            otherKey.Add(keyBefore);
             key = keys[randomKeyIndex];
+            otherKey.Remove(key);
             GetComponent<Image>().sprite = keyImage[randomKeyIndex];
             return false;
         }
