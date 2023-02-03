@@ -18,8 +18,10 @@ public class TimeSystem : MonoBehaviour
      void Update()
      {
          timeLeft = timeSpan - Time.time;
-         Mathf.Lerp(0, timeSpan, timeLeft);
+         timeLeft = Mathf.Clamp(timeLeft, 0, timeSpan);
 
          timeText.text = $"Time Left : {timeLeft:F0}";
      }
+     
+     
 }
