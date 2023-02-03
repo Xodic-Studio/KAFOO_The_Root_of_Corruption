@@ -407,7 +407,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c3f90e2bb5724842a0104ef8c9a817f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 1
+  level: 4
   P1PressSystem: {fileID: 2001533963}
   P2PressSystem: {fileID: 1797751807}
   TimeSystem: {fileID: 698833638}
@@ -1352,6 +1352,8 @@ MonoBehaviour:
   keys: 11010000120100001401000013010000
   pressGoal: 0
   pressCount: 0
+  otherKey: 
+  pressAble: 1
 --- !u!1 &1819554840
 GameObject:
   m_ObjectHideFlags: 0
@@ -1655,3 +1657,5 @@ MonoBehaviour:
   keys: 77000000730000006100000064000000
   pressGoal: 0
   pressCount: 0
+  otherKey: 
+  pressAble: 1
