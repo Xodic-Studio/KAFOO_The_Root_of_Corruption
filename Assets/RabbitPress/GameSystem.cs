@@ -11,10 +11,10 @@ public class GameSystem : MonoBehaviour
     [SerializeField] private PressSystem P2PressSystem;
     [SerializeField] private TimeSystem TimeSystem;
     
-    private readonly Level _lv1 = new() {pressGoal = 150, keyLimit = 3, timeLimit = 30};
-    private readonly Level _lv2 = new() {pressGoal = 150, keyLimit = 2, timeLimit = 45};
-    private readonly Level _lv3 = new() {pressGoal = 175, keyLimit = 0, timeLimit = 60};
-    private readonly Level _lv4 = new() {pressGoal = 250, keyLimit = 0, timeLimit = 90};
+    private readonly Level _lv1 = new() {pressGoal = 100, keyLimit = 3, timeLimit = 30};
+    private readonly Level _lv2 = new() {pressGoal = 120, keyLimit = 2, timeLimit = 45};
+    private readonly Level _lv3 = new() {pressGoal = 150, keyLimit = 0, timeLimit = 60};
+    private readonly Level _lv4 = new() {pressGoal = 200, keyLimit = 0, timeLimit = 90};
 
     private void Start()
     {
@@ -82,6 +82,7 @@ public class GameSystem : MonoBehaviour
             // No one win
             else
             {
+                
             }
         }
     }
