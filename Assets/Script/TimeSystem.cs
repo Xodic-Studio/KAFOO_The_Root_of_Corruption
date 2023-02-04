@@ -14,6 +14,7 @@ public class TimeSystem : MonoBehaviour
      void Start()
      {
          timeText = GetComponent<TextMeshProUGUI>();
+         timeText.text = String.Empty;
          timeLeft = timeSpan;
      }
 

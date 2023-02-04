@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b38f89befb605b4287a7aebc92d5d21, type: 3}
-  m_Name: Tutorial Image
+  m_Name: VampireSurvival
   m_EditorClassIdentifier: 
   tutorialImages:
   - {fileID: -313514039, guid: 8d481ddb9a9b0b24fabff7f88560e95e, type: 3}
