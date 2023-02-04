@@ -626,6 +626,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeSpan: 30
   timeLeft: 0
+  gameStart: 0
 --- !u!114 &704187922
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -831,6 +832,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentLevelNumber: 1
+  popUpPrefab: {fileID: 6604063561081856403, guid: 8727c19f6bcbe804595113b76549d386, type: 3}
+  tutorialImageSO: {fileID: 11400000, guid: 99f6b2549f941bf48be2df631a1de2fc, type: 2}
+  popUpImageIndex: 0
   timeSystem: {fileID: 704187921}
   pantherShooterGameSystem: {fileID: 1312337065}
 --- !u!1 &1540577301

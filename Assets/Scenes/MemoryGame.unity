@@ -258,6 +258,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   memoryScoreSystem: {fileID: 562037389}
+  timeSystem: {fileID: 561266458}
   memorySprites:
   - {fileID: 1287648970}
   - {fileID: 1308760450}
@@ -600,6 +601,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeSpan: 5
   timeLeft: 0
+  gameStart: 0
 --- !u!114 &561266459
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -762,6 +764,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentLevelNumber: 1
+  popUpPrefab: {fileID: 6604063561081856403, guid: 8727c19f6bcbe804595113b76549d386, type: 3}
+  tutorialImageSO: {fileID: 11400000, guid: 99f6b2549f941bf48be2df631a1de2fc, type: 2}
+  popUpImageIndex: 0
   timeSystem: {fileID: 561266458}
   memoryGameSystem:
   - {fileID: 280480787}
@@ -977,6 +982,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   memoryScoreSystem: {fileID: 562037389}
+  timeSystem: {fileID: 561266458}
   memorySprites:
   - {fileID: 1093274478}
   - {fileID: 690549990}

@@ -22,10 +22,21 @@ public class GameSystem : MonoBehaviour
     private readonly Level _lv2 = new() {pressGoal = 120, keyLimit = 2, timeLimit = 45};
     private readonly Level _lv3 = new() {pressGoal = 150, keyLimit = 0, timeLimit = 60};
     private readonly Level _lv4 = new() {pressGoal = 200, keyLimit = 0, timeLimit = 90};
+    
+    public GameObject popUpPrefab;
+    private PopUpSystem popUpSystem;
+    public TutorialImage tutorialImageSO;
+    private bool popUped;
+    public int popUpImageIndex = 0;
 
     private void Start()
     {
         level = MasterScript.Instance.minigamePlayCount[2];
+        popUpImageIndex = level - 1;
+        popUpSystem = Instantiate(popUpPrefab, canvas.transform).GetComponent<PopUpSystem>();
+        popUpSystem.imageIndex = popUpImageIndex;
+        popUpSystem.tutorialImageSO = tutorialImageSO;
+        popUpSystem.ShowPopUp();
         switch (level)
         {
             case 1:
@@ -69,6 +80,12 @@ public class GameSystem : MonoBehaviour
 
     void Update()
     {
+        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.RightControl)) && !popUped)
+        {
+            popUped = true;
+            popUpSystem.ClosePopUp();
+            timeSystem.gameStart = true;
+        }
         if (timeSystem.timeLeft <= 0 || p1PressSystem.pressCount >= p1PressSystem.pressGoal ||
             p2PressSystem.pressCount >= p2PressSystem.pressGoal)
         {
@@ -81,6 +98,7 @@ public class GameSystem : MonoBehaviour
     {
         if (!showed)
         {
+            timeSystem.gameStart = false;
             GameObject finishScreen = Instantiate(finishScreenPrefab, canvas.transform);
             FinishScreen finishScreenSystem = finishScreen.GetComponent<FinishScreen>();
             // End game condition

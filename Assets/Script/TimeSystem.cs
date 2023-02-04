@@ -9,15 +9,21 @@ public class TimeSystem : MonoBehaviour
      public float timeSpan = 30f;
      [SerializeField] public float timeLeft;
      private TextMeshProUGUI timeText;
+     public bool gameStart;
 
      void Start()
      {
          timeText = GetComponent<TextMeshProUGUI>();
+         timeText.text = String.Empty;
          timeLeft = timeSpan;
      }
 
      void Update()
      {
+         if (!gameStart)
+         {
+             return;
+         }
          timeLeft -= Time.deltaTime;
          timeLeft = Mathf.Clamp(timeLeft, 0, timeSpan);
 

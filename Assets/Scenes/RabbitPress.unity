@@ -414,6 +414,9 @@ MonoBehaviour:
   finishScreenPrefab: {fileID: 111461065495219332, guid: 9b9efb97bf5f6fd42adcb21e4f487de4, type: 3}
   canvas: {fileID: 1837065159}
   showed: 0
+  popUpPrefab: {fileID: 6604063561081856403, guid: 8727c19f6bcbe804595113b76549d386, type: 3}
+  tutorialImageSO: {fileID: 11400000, guid: 99f6b2549f941bf48be2df631a1de2fc, type: 2}
+  popUpImageIndex: 0
 --- !u!4 &338427859
 Transform:
   m_ObjectHideFlags: 0
@@ -642,6 +645,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeSpan: 90
   timeLeft: 0
+  gameStart: 0
 --- !u!114 &698833639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1355,6 +1359,7 @@ MonoBehaviour:
   keys: 11010000120100001401000013010000
   pressGoal: 0
   pressCount: 0
+  timeSystem: {fileID: 698833638}
   otherKey: 
   pressAble: 1
 --- !u!1 &1819554840
@@ -1660,5 +1665,6 @@ MonoBehaviour:
   keys: 77000000730000006100000064000000
   pressGoal: 0
   pressCount: 0
+  timeSystem: {fileID: 698833638}
   otherKey: 
   pressAble: 1

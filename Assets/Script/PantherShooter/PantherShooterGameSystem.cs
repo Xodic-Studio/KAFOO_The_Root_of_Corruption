@@ -40,6 +40,11 @@ public class PantherShooterGameSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
+    }
+
+    public void SetUp()
+    {
         if (glueMode)
         {
             InvokeRepeating("GlueMode", 2f, glueInterval);
@@ -56,6 +61,10 @@ public class PantherShooterGameSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!timeSystem.gameStart)
+        {
+            return;
+        }
         HunterControl();
         PantherControl();
         RestrictMovement();
@@ -95,6 +104,7 @@ public class PantherShooterGameSystem : MonoBehaviour
         {
             if (!finishShowed)
             {
+                timeSystem.gameStart = false;
                 GameObject finishScreen = Instantiate(finishScreenPrefab, canvas.transform);
                 FinishScreen finishScreenSystem = finishScreen.GetComponent<FinishScreen>();
                 if (currentHp > 0)
@@ -273,6 +283,7 @@ public class PantherShooterGameSystem : MonoBehaviour
 
         if (currentHp <= 0)
         {
+            timeSystem.gameStart = false;
             GameObject finishScreen = Instantiate(finishScreenPrefab, canvas.transform);
             FinishScreen finishScreenSystem = finishScreen.GetComponent<FinishScreen>();
             MasterScript.Instance.p1Score++;

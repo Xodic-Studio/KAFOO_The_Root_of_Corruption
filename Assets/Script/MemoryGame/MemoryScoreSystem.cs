@@ -31,6 +31,7 @@ public class MemoryScoreSystem : MonoBehaviour
     {
         if (!showed)
         {
+            timeSystem.gameStart = false;
             GameObject finishScreen = Instantiate(finishScreenPrefab, canvas.transform);
             FinishScreen finishScreenSystem = finishScreen.GetComponent<FinishScreen>();
             if (p1Score > p2Score)
