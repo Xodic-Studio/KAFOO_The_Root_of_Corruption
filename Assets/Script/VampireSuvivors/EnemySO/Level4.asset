@@ -15,5 +15,6 @@ MonoBehaviour:
   level: 4
   speed: 0.5
   sprite: {fileID: 0}
-  hp: 20
+  hp: 17
   cost: 7
+  color: {r: 0, g: 0, b: 0, a: 0}

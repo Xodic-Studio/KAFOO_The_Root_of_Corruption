@@ -24,7 +24,8 @@ public class GoodPlayer : MonoBehaviour
     public void AssignData(GameSystemData gameSystemData)
     {
         hp = gameSystemData.goodPlayerHp;
-        stamina = gameSystemData.goodPlayerStaminaRegen;
+        staminaRegenRate = gameSystemData.goodPlayerStaminaRegen;
+        fireRate = gameSystemData.goodPlayerFireRate;
     }
     void Start()
     {
