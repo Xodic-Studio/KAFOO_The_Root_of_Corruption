@@ -83,8 +83,7 @@ public class GameSystem : MonoBehaviour
         if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.RightControl)) && !popUped)
         {
             popUped = true;
-            popUpSystem.ClosePopUp();
-            timeSystem.gameStart = true;
+            popUpSystem.ClosePopUp(timeSystem);
         }
         if (timeSystem.timeLeft <= 0 || p1PressSystem.pressCount >= p1PressSystem.pressGoal ||
             p2PressSystem.pressCount >= p2PressSystem.pressGoal)

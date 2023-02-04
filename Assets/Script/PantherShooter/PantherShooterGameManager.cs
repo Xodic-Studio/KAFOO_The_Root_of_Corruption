@@ -56,8 +56,7 @@ public class PantherShooterGameManager : MonoBehaviour
         if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.RightControl)) && !popUped)
         {
             popUped = true;
-            popUpSystem.ClosePopUp();
-            timeSystem.gameStart = true;
+            popUpSystem.ClosePopUp(timeSystem);
             if (!setUpSystem)
             {
                 pantherShooterGameSystem.SetUp();

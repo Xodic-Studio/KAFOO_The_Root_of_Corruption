@@ -55,8 +55,7 @@ public class MemoryGameManager : MonoBehaviour
         if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.RightControl)) && !popUped)
         {
             popUped = true;
-            popUpSystem.ClosePopUp();
-            timeSystem.gameStart = true;
+            popUpSystem.ClosePopUp(timeSystem);
             if (!setUpSystem)
             {
                 foreach (MemoryGameSystem mgs in memoryGameSystem)

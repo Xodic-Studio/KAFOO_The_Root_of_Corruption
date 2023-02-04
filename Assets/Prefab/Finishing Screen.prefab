@@ -329,8 +329,8 @@ MonoBehaviour:
   player2Image: {fileID: 111461065919825609}
   backdropBeginColor: {r: 0, g: 0, b: 0, a: 0}
   backdropEndColor: {r: 0, g: 0, b: 0, a: 0.74509805}
-  backgroundBeginPosition: {x: 0, y: -300}
-  backgroundEndPosition: {x: 0, y: 0}
+  backgroundBeginPosition: {x: 0, y: -1000, z: 0}
+  backgroundEndPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &111461065539330706
 GameObject:
   m_ObjectHideFlags: 0
