@@ -9,6 +9,7 @@ public class ButtonSelection : MonoBehaviour
     [Required] [SceneObjectsOnly] public List<Button> buttons;
     public int selectedButton;
     public bool isSelecting;
+    public bool isVertical;
 
     private void Start()
     {
@@ -17,7 +18,17 @@ public class ButtonSelection : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetAxisRaw("Horizontal") != 0 && !isSelecting) StartCoroutine(SelectButton());
+        if (isVertical)
+        {
+            if (Input.GetAxis("Vertical") != 0 && !isSelecting) StartCoroutine(SelectButton());
+        }
+        else
+        {
+            if (Input.GetAxisRaw("Horizontal") != 0 && !isSelecting) StartCoroutine(SelectButton());
+        }
+        
+        
+        
         
 
         if (Input.GetKeyDown(KeyCode.Space)|| Input.GetKeyDown(KeyCode.RightControl)) buttons[selectedButton].onClick.Invoke();
@@ -25,17 +36,14 @@ public class ButtonSelection : MonoBehaviour
     private IEnumerator SelectButton()
     {
         isSelecting = true;
-        if (Input.GetAxisRaw("Horizontal") > 0)
+        if (isVertical)
         {
-            selectedButton++;
-            if (selectedButton >= buttons.Count) selectedButton = 0;
+            Vertical();
         }
-        else if (Input.GetAxisRaw("Horizontal") < 0)
+        else
         {
-            selectedButton--;
-            if (selectedButton < 0) selectedButton = buttons.Count - 1;
+            Horizontal();
         }
-
         //Change color of selected button
         buttons[selectedButton].gameObject.GetComponent<Image>().color = Color.red;
         for (var i = 0; i < buttons.Count; i++)
@@ -44,5 +52,33 @@ public class ButtonSelection : MonoBehaviour
         buttons[selectedButton].Select();
         yield return new WaitForSeconds(0.2f);
         isSelecting = false;
+
+        void Horizontal()
+        {
+            if (Input.GetAxisRaw("Horizontal") > 0)
+            {
+                selectedButton++;
+                if (selectedButton >= buttons.Count) selectedButton = 0;
+            }
+            else if (Input.GetAxisRaw("Horizontal") < 0)
+            {
+                selectedButton--;
+                if (selectedButton < 0) selectedButton = buttons.Count - 1;
+            }
+        }
+
+        void Vertical()
+        {
+            if (Input.GetAxisRaw("Vertical") > 0)
+            {
+                selectedButton--;
+                if (selectedButton < 0) selectedButton = buttons.Count - 1;
+            }
+            else if (Input.GetAxisRaw("Vertical") < 0)
+            {
+                selectedButton++;
+                if (selectedButton >= buttons.Count) selectedButton = 0;
+            }
+        }
     }
 }
