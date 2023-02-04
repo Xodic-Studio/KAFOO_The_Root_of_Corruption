@@ -9,14 +9,15 @@ public class GoodPlayer : MonoBehaviour
     [SerializeField] private GameObject bullet;
     [SerializeField] private float bulletOffset;
     [SerializeField] private float fireRate;
-
     [SerializeField] private Scrollbar staminaBar;
-
+    [SerializeField] private TimeSystem timeSystem;
+ 
     private Vector3 bulletPosition;
     private float nextFire;
     
     public float staminaRegenRate;
     public int hp;
+    
     [SerializeField] private float maxStamina = 10f;
     public float stamina;
 
@@ -27,6 +28,11 @@ public class GoodPlayer : MonoBehaviour
     }
     void Start()
     {
+        
+    }
+
+    public void SetUp()
+    {
         nextFire = 0;
         InvokeRepeating(nameof(StaminaRegen), 0, 0.1f);
     }
@@ -34,8 +40,8 @@ public class GoodPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!timeSystem.gameStart) return;
         bulletPosition = transform.right* bulletOffset;
-
         RotateViewFollowMousePosition();
         Fire(bullet);
         StaminaBarUpdate();
