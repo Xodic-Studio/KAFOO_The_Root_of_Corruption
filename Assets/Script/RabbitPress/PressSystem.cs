@@ -21,7 +21,7 @@ public class PressSystem : MonoBehaviour
     [SerializeField] private int spawnCount;
     [SerializeField] private float[] xRange, yRange;
     [SerializeField] private bool comboParticlePlayed;
-    [SerializeField] private ParticleSystem particleSystem;
+    [SerializeField] private ParticleSystem particle;
     [SerializeField] private AudioSource audioSource;
     [HideInInspector] public int pressCount;
     public TimeSystem timeSystem;
@@ -88,8 +88,8 @@ public class PressSystem : MonoBehaviour
 
     private void PlayOneEffect()
     {
-        particleSystem.transform.position = cam.ScreenToWorldPoint(transform.position);
-        particleSystem.Play();
+        particle.transform.position = cam.ScreenToWorldPoint(transform.position);
+        particle.Play();
     }
     
     private void PlayComboEffect()

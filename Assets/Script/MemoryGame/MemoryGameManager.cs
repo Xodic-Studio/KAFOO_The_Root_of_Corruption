@@ -7,12 +7,15 @@ public class MemoryGameManager : MonoBehaviour
 
     public int currentLevelNumber = 1;
     public GameObject popUpPrefab;
+    public GameObject pausePrefab;
+    private GameObject pauseInstance;
     private PopUpSystem popUpSystem;
     public TutorialImage tutorialImageSO;
     private bool setUpSystem = false;
     public int popUpImageIndex = 0;
     private GameObject canvas;
     private bool popUped;
+    private bool paused = false;
     struct Level
     {
         public float timeSpan;
@@ -37,6 +40,8 @@ public class MemoryGameManager : MonoBehaviour
         popUpSystem.imageIndex = popUpImageIndex;
         popUpSystem.tutorialImageSO = tutorialImageSO;
         popUpSystem.ShowPopUp();
+        pauseInstance = Instantiate(pausePrefab, canvas.transform);
+        pauseInstance.SetActive(false);
         Level currentLevel = allLevels[currentLevelNumber - 1];
         timeSystem.timeSpan = currentLevel.timeSpan;
         foreach (MemoryGameSystem mgs in memoryGameSystem)
@@ -51,6 +56,12 @@ public class MemoryGameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        CheckForPopUp();
+        CheckForPause();
+    }
+
+    void CheckForPopUp()
+    {
         if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.RightControl)) && !popUped)
         {
             popUped = true;
@@ -63,6 +74,30 @@ public class MemoryGameManager : MonoBehaviour
                 }
 
                 setUpSystem = true;
+            }
+        }
+    }
+
+    void CheckForPause()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape) && !paused)
+        {
+            Debug.Log("TESSSSSTTT");
+            pauseInstance.SetActive(true);
+            timeSystem.gameStart = false;
+            paused = true;
+        }
+        if (paused)
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                pauseInstance.SetActive(false);
+                timeSystem.gameStart = true;
+                paused = false;
+            }
+            if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.RightControl)))
+            {
+                LoadSceneManager.Instance.LoadScene(SceneName.Selection);
             }
         }
     }

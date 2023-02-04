@@ -765,6 +765,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentLevelNumber: 1
   popUpPrefab: {fileID: 6604063561081856403, guid: 8727c19f6bcbe804595113b76549d386, type: 3}
+  pausePrefab: {fileID: 2310180254477964168, guid: 74a95c66cb6a26e45966b8e55eb503e1, type: 3}
   tutorialImageSO: {fileID: 11400000, guid: 99f6b2549f941bf48be2df631a1de2fc, type: 2}
   popUpImageIndex: 0
   timeSystem: {fileID: 561266458}

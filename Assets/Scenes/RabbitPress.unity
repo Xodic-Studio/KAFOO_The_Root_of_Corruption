@@ -6317,7 +6317,7 @@ MonoBehaviour:
   - 0
   - 5
   comboParticlePlayed: 0
-  particleSystem: {fileID: 806965281}
+  particle: {fileID: 806965281}
   audioSource: {fileID: 0}
   pressCount: 0
   timeSystem: {fileID: 698833638}
@@ -11449,7 +11449,7 @@ MonoBehaviour:
   - -500
   - 500
   comboParticlePlayed: 0
-  particleSystem: {fileID: 1900302936}
+  particle: {fileID: 1900302936}
   audioSource: {fileID: 0}
   pressCount: 0
   timeSystem: {fileID: 698833638}
