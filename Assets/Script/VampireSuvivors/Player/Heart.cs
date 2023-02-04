@@ -5,23 +5,13 @@ using UnityEngine;
 
 public class Heart : MonoBehaviour
 {
-    [SerializeField] private GameObject enemy;
-    public GoodPS player;
+    public GoodPlayer player;
+    public int id;
     public bool isCatched;
     
     void Start()
     {
         isCatched = false;
-    }
-    
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.tag.Equals("Enemy"))
-        {
-            isCatched = true;
-            other.enabled = false;
-            GetComponent<Collider2D>().enabled = false;
-        }
     }
 
     private void OnDestroy()

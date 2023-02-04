@@ -3,14 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-public class SpawnHeartZone : MonoBehaviour
+public class HeartZone : MonoBehaviour
 {
-    [SerializeField] private int heartAmout;
+    private int heartAmout;
     [SerializeField] private float offset;
-    [SerializeField] private GoodPS player;
-    [SerializeField] private GameObject heart;
+    [SerializeField] private GoodPlayer player;
+    [SerializeField] private GameObject heartPrefab;
 
     void Start()
     {
@@ -18,11 +19,7 @@ public class SpawnHeartZone : MonoBehaviour
         
         CreateHeart(heartAmout);
     }
-
-    private void Update()
-    {
-        
-    }
+    
 
     void CreateHeart(int heartAmout)
     {
@@ -45,13 +42,13 @@ public class SpawnHeartZone : MonoBehaviour
             
             if (i == 0)
             {
-                GameObject newHeart = Instantiate(heart, position, transform.rotation, gameObject.transform);
+                GameObject newHeart = Instantiate(heartPrefab, position, transform.rotation, gameObject.transform);
                 newHeart.GetComponent<Heart>().player = player;
             }
             else
             {
                 position = new Vector2(centerPosition.x + (distance * direction), centerPosition.y);
-                Instantiate(heart, position, transform.rotation, gameObject.transform);
+                Instantiate(heartPrefab, position, transform.rotation, gameObject.transform);
                 isPositiveDirection = !isPositiveDirection;
                 itemCreated++;
             }
@@ -69,6 +66,16 @@ public class SpawnHeartZone : MonoBehaviour
             {
                 direction = -1;
             }
+            AssignIDToHeart();
+        }
+    }
+    
+    void AssignIDToHeart()
+    {
+        foreach (var heart in transform.GetComponentsInChildren<Heart>())
+        {
+            heart.id = heart.transform.GetSiblingIndex();
+            heart.player = player;
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Runtime.InteropServices.ComTypes;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GoodPS : MonoBehaviour
+public class GoodPlayer : MonoBehaviour
 {
     [SerializeField] private GameObject bullet;
     [SerializeField] private float bulletOffset;
@@ -23,7 +23,7 @@ public class GoodPS : MonoBehaviour
     void Start()
     {
         nextFire = 0;
-        StartCoroutine(staminaRegen());
+        InvokeRepeating(nameof(StaminaRegen), 0, 0.1f);
     }
 
     // Update is called once per frame
@@ -61,13 +61,9 @@ public class GoodPS : MonoBehaviour
         staminaBar.size = stamina / maxStamina;
     }
     
-    IEnumerator staminaRegen()
+    void StaminaRegen()
     {
-        while (true)
-        {
-            stamina += staminaRegenRate;
-            stamina = Mathf.Clamp(stamina, 0, maxStamina);
-            yield return new WaitForSeconds(1);
-        }
+        stamina += staminaRegenRate;
+        stamina = Mathf.Clamp(stamina, 0, maxStamina);
     }
 }

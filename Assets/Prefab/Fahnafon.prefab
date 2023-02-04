@@ -103,7 +103,7 @@ MonoBehaviour:
   bulletOffset: 1
   fireRate: 0.5
   staminaBar: {fileID: 0}
-  staminaRegenRate: 1
+  staminaRegenRate: 1.5
   hp: 5
   maxStamina: 10
   stamina: 10

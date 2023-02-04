@@ -1,79 +1,41 @@
-using System;
-using System.Collections;
+
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using UnityEngine.UI;
-using Random = UnityEngine.Random;
+using UnityEngine.Serialization;
 
 
 public class Enemy : MonoBehaviour
 {
-    public int level;
     [SerializeField] private float speed;
-    [SerializeField] private Vector2 catchingOffset;
-    
+
 
     public int hp;
-    public float cost;
     public bool isCatching;
-    public GameObject playerHeartZone;
+    public Heart target;
+    public HeartZone heartZone;
 
     private int randomIndexHeart = 0;
-    private GameObject heartTarget;
-    private Vector2 startPos;
+    private GameObject capturedHeart;
+    private Vector2 spawnPoint;
 
 
-    private readonly Level _lv1 = new() {hp = 1, cost = 1};
-    private readonly Level _lv2 = new() {hp = 4, cost = 3};
-    private readonly Level _lv3 = new() {hp = 7, cost = 5};
-    private readonly Level _lv4 = new() {hp = 10, cost = 7};
-    
+    public void AssignEnemyData(EnemyData enemyData, Heart target, HeartZone heartZone)
+    {
+        hp = enemyData.hp;
+        speed = enemyData.speed;
+        this.heartZone = heartZone;
+        this.target = target;
+        spawnPoint = transform.position;
+    }
+
     void Start()
     {
-        switch (level)
-        {
-            case 1:
-            {
-                GetComponent<SpriteRenderer>().color = Color.yellow;
-                hp = _lv1.hp;
-                cost = _lv1.cost;
-                break;
-            }
-            case 2:
-            {
-                GetComponent<SpriteRenderer>().color = Color.red;
-                hp = _lv2.hp;
-                cost = _lv2.cost;
-                break;
-            }
-            case 3:
-            {
-                GetComponent<SpriteRenderer>().color = Color.magenta;
-                hp = _lv3.hp;
-                cost = _lv3.cost;
-                break;
-            }
-            case 4:
-            {
-                GetComponent<SpriteRenderer>().color = Color.black;
-                hp = _lv4.hp;
-                cost = _lv4.cost;
-                break;
-            }
-        }
-        
-        startPos = transform.position;
+        spawnPoint = transform.position;
     }
     
     void Update()
     {
-        if (IsEnemyDie())
-        {
-            Destroy(gameObject);
-        }
-        
+        if(IsEnemyDie()) return;
         if (isCatching == false)
         {
             EnemyMoveToPlayerHeart();
@@ -87,73 +49,69 @@ public class Enemy : MonoBehaviour
 
     private void EnemyMoveToPlayerHeart()
     {
-        if (playerHeartZone.transform.childCount <= 0)
+        if (target == null)
         {
-            Debug.Log("No Heart");
+            EnemyBackToStartPos(false);
             return;
         }
-        if (heartTarget != playerHeartZone.transform.GetChild(randomIndexHeart).gameObject)
+            
+        if (target.isCatched)
         {
-            randomIndexHeart = Random.Range(0, playerHeartZone.transform.childCount);
-            heartTarget = playerHeartZone.transform.GetChild(randomIndexHeart).gameObject;
-            Debug.Log("Find Target");
+            target = FindNewHeart();
+            return;
         }
-        else
-        {
-            if (heartTarget.GetComponent<Heart>().isCatched)
-            {
-                randomIndexHeart = Random.Range(0, playerHeartZone.transform.childCount);
-                heartTarget = playerHeartZone.transform.GetChild(randomIndexHeart).gameObject;
-                Debug.Log("Find Target");
-            }
-            transform.up = heartTarget.transform.position - transform.position;
-            GetComponent<Rigidbody2D>().velocity = transform.up * speed;
-        }
+        Vector3 direction = target.transform.position - transform.position;
+        transform.Translate(direction * speed * Time.deltaTime);
 
-    }
-
-    private void EnemyBackToStartPos()
-    {
-       // heartTarget.transform.SetParent(transform);
-        heartTarget.transform.position = (Vector2)transform.position;
-        heartTarget.transform.Rotate(0,0,2);
-        transform.up = startPos - (Vector2)transform.position.normalized;
-        GetComponent<Rigidbody2D>().velocity = transform.up * 2 * speed;
-        Invoke("DestroyObject",3);
     }
     
-   
-    bool IsEnemyDie()
+    private Heart FindNewHeart()
     {
-        if (hp <= 0)
+        if(heartZone.transform.childCount == 0) return null;
+        randomIndexHeart = Random.Range(0, heartZone.transform.childCount);
+        Debug.Log("Find new heart");
+        return heartZone.transform.GetChild(randomIndexHeart).gameObject.GetComponent<Heart>();
+        
+
+    }
+
+    private void EnemyBackToStartPos(bool withHeart = true)
+    {
+        if (withHeart)
         {
-            return true;
+            capturedHeart.transform.SetParent(transform);
+            capturedHeart.transform.position = (Vector2)transform.position;
+            capturedHeart.transform.Rotate(0,0,2);
         }
-        else
-        {
-            return false;
-        }
+        Vector3 direction = spawnPoint - (Vector2)transform.position.normalized;
+        transform.Translate(direction * speed * 2 * Time.deltaTime);
+        Invoke(nameof(DestroyObject),3);
+    }
+
+
+    private bool IsEnemyDie()
+    {
+        if (hp > 0) return false;
+        Destroy(gameObject);
+        return true;
     }
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.tag.Equals("Heart"))
+        if(!col.gameObject.TryGetComponent<Heart>(out var touchObject)) return;
+        if (touchObject.id == target.id)
         {
+            target.isCatched = true;
+            col.enabled = false;
+            GetComponent<Collider2D>().enabled = false;
             isCatching = true;
-            heartTarget = col.gameObject;
+            capturedHeart = col.gameObject;
         }
     }
 
     private void DestroyObject()
     {
         Destroy(gameObject);
-        Destroy(heartTarget);
-    }
-    
-    class Level
-    {
-        public int hp;
-        public float cost;
-
+        Destroy(capturedHeart);
     }
 }

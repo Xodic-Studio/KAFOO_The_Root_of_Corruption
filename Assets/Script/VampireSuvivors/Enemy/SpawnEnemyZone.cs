@@ -1,73 +1,75 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 
 
 public class SpawnEnemyZone : MonoBehaviour
 {
-    [SerializeField] private SpawnHeartZone spawnHeartZone;
-    [SerializeField] private Enemy enemy;
+    [SerializeField] private HeartZone heartZone;
+    [SerializeField] private Enemy enemyPrefab;
     [SerializeField] private float stamina;
     [SerializeField] private float staminaRegenRate;
     [SerializeField] private float maxStamina;
     [SerializeField] private Scrollbar staminaBar;
-
-    private int randomSpawnIndex;
+    [SerializeField] private List<EnemyData> enemyDataList;
+    
     void Start()
     {
-        StartCoroutine(staminaRegen());
+        InvokeRepeating(nameof(StaminaRegen) , 0, 0.1f);
     }
     
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q) && enemyDataList[0].cost <= stamina)
         {
-            CreateEnemy(1);
+            CreateEnemy(enemyDataList[0]);
         }
-        else if (Input.GetKeyDown(KeyCode.W))
+        else if (Input.GetKeyDown(KeyCode.W) && enemyDataList[1].cost <= stamina)
         {
-            CreateEnemy(2);
+            CreateEnemy(enemyDataList[1]);
         }
-        else if (Input.GetKeyDown(KeyCode.E))
+        else if (Input.GetKeyDown(KeyCode.E) && enemyDataList[2].cost <= stamina)
         {
-            CreateEnemy(3);
+            CreateEnemy(enemyDataList[2]);
         }
-        else if (Input.GetKeyDown(KeyCode.R))
+        else if (Input.GetKeyDown(KeyCode.R) && enemyDataList[3].cost <= stamina)
         {
-            CreateEnemy(4);
+            CreateEnemy(enemyDataList[3]);
         }
-        
+
         StaminaBarUpdate();
     }
 
+    private void CreateEnemy(EnemyData enemyData)
+    {
+        int randomSpawnIndex = Random.Range(0, transform.childCount);
+        int randomHeartIndex = Random.Range(0, heartZone.transform.childCount);
+        Debug.Log("Cost: "+ enemyData.cost);
+        if (heartZone.transform.childCount <= 0)
+        {
+            Debug.Log("No Heart");
+            return;
+        }
+        stamina -=  enemyData.cost;
+        Enemy newEnemy = Instantiate(enemyPrefab, (Vector2)transform.GetChild(randomSpawnIndex).position,Quaternion.Euler(0,0,0));
+        newEnemy.AssignEnemyData(enemyData, heartZone.transform.GetChild(randomHeartIndex).gameObject.GetComponent<Heart>(),heartZone);
+    }
+    
+    
+    
+    
     public void StaminaBarUpdate()
     {
         staminaBar.size = stamina / maxStamina;
     }
     
-    public void CreateEnemy(int level)
-    {
-        randomSpawnIndex = Random.Range(0, transform.childCount);
-        enemy.level = level;
-        stamina -=  enemy.cost;
-        Debug.Log("Cost: "+ enemy.cost);
-        
-        if (stamina > 0)
-        {
-            Enemy newEnemy = Instantiate(enemy, (Vector2)transform.GetChild(randomSpawnIndex).position,Quaternion.Euler(0,0,0));
-            newEnemy.playerHeartZone = spawnHeartZone.gameObject;
-        }
-    }
     
-    IEnumerator staminaRegen()
+    void StaminaRegen()
     {
-        while (true)
-        {
-            stamina += staminaRegenRate;
-            stamina = Mathf.Clamp(stamina, 0, maxStamina);
-            yield return new WaitForSeconds(1);
-        }
+        stamina += staminaRegenRate;
+        stamina = Mathf.Clamp(stamina, 0, maxStamina);
     }
 }
