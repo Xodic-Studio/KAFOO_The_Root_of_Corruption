@@ -74,7 +74,7 @@ public class PressSystem : MonoBehaviour
                 Debug.Log("Change Key");
                     
             }
-            particleSystem.Play();
+            PlayOneEffect();
             pressCount++;
             comboParticlePlayed = false;
         }
@@ -86,6 +86,12 @@ public class PressSystem : MonoBehaviour
         PlayComboEffect();
     }
 
+    private void PlayOneEffect()
+    {
+        particleSystem.transform.position = cam.ScreenToWorldPoint(transform.position);
+        particleSystem.Play();
+    }
+    
     private void PlayComboEffect()
     {
         
