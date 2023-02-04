@@ -208,8 +208,9 @@ GameObject:
   - component: {fileID: 20241186}
   - component: {fileID: 20241187}
   - component: {fileID: 20241188}
+  - component: {fileID: 20241189}
   m_Layer: 0
-  m_Name: UIManager
+  m_Name: Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -265,6 +266,19 @@ MonoBehaviour:
   timeText: {fileID: 803148360}
   score1Text: {fileID: 700939995}
   score2Text: {fileID: 209594228}
+--- !u!114 &20241189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 20241185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 929a2c29837a0864eb178178790c9945, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundData: {fileID: 11400000, guid: 0e93768cb3740be46a82833f2d927c63, type: 2}
 --- !u!1 &88126118
 GameObject:
   m_ObjectHideFlags: 0
