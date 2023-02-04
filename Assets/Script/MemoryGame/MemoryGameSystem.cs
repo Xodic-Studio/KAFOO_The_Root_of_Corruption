@@ -33,7 +33,9 @@ public class MemoryGameSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        playerControl = playerNum == 1
+            ? new List<KeyCode>() { KeyCode.W, KeyCode.A, KeyCode.S, KeyCode.D }
+            : new List<KeyCode>() { KeyCode.UpArrow, KeyCode.LeftArrow, KeyCode.DownArrow, KeyCode.RightArrow };
     }
 
     public void SetUpSystem()
@@ -48,9 +50,6 @@ public class MemoryGameSystem : MonoBehaviour
         currentSequenceLength = minSequenceLength;
         RandomSequence(sequenceIndices, currentSequenceLength);
         StartCoroutine(PlaySequence(sequenceIndices));
-        playerControl = playerNum == 1
-            ? new List<KeyCode>() { KeyCode.W, KeyCode.A, KeyCode.S, KeyCode.D }
-            : new List<KeyCode>() { KeyCode.UpArrow, KeyCode.LeftArrow, KeyCode.DownArrow, KeyCode.RightArrow };
     }
 
     // Update is called once per frame

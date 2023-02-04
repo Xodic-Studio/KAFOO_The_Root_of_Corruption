@@ -710,6 +710,7 @@ GameObject:
   - component: {fileID: 562037390}
   - component: {fileID: 562037391}
   - component: {fileID: 562037389}
+  - component: {fileID: 562037392}
   m_Layer: 0
   m_Name: Main Controller
   m_TagString: Untagged
@@ -765,13 +766,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentLevelNumber: 1
   popUpPrefab: {fileID: 6604063561081856403, guid: 8727c19f6bcbe804595113b76549d386, type: 3}
-  pausePrefab: {fileID: 2310180254477964168, guid: 74a95c66cb6a26e45966b8e55eb503e1, type: 3}
   tutorialImageSO: {fileID: 11400000, guid: 99f6b2549f941bf48be2df631a1de2fc, type: 2}
   popUpImageIndex: 0
   timeSystem: {fileID: 561266458}
   memoryGameSystem:
   - {fileID: 280480787}
   - {fileID: 813105393}
+--- !u!114 &562037392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 562037388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d89394df440db946b3588e31a9facd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pausePrefab: {fileID: 2310180254477964168, guid: 74a95c66cb6a26e45966b8e55eb503e1, type: 3}
+  timeSystem: {fileID: 561266458}
 --- !u!1 &690549988
 GameObject:
   m_ObjectHideFlags: 0

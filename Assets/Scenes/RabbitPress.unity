@@ -388,6 +388,7 @@ GameObject:
   m_Component:
   - component: {fileID: 338427859}
   - component: {fileID: 338427858}
+  - component: {fileID: 338427860}
   m_Layer: 0
   m_Name: GameSystem
   m_TagString: Untagged
@@ -432,6 +433,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &338427860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 338427857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d89394df440db946b3588e31a9facd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pausePrefab: {fileID: 2310180254477964168, guid: 74a95c66cb6a26e45966b8e55eb503e1, type: 3}
+  timeSystem: {fileID: 698833638}
 --- !u!1 &482339565
 GameObject:
   m_ObjectHideFlags: 0
