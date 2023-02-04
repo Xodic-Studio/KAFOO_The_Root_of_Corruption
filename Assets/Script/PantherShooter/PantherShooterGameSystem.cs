@@ -10,9 +10,11 @@ public class PantherShooterGameSystem : MonoBehaviour
     public int levelNum = 1;
     public GameObject panther, hunter;
     public GameObject crosshair;
+    public Sprite[] swapSprites;
     public GameObject finishScreenPrefab;
     public Vector3 crosshairScale;
     private GameObject canvas;
+    public Animator flashImage;
     public Image[] hearts;
     [SerializeField] private int currentHp;
     private CircleCollider2D crosshairCollider;
@@ -36,6 +38,7 @@ public class PantherShooterGameSystem : MonoBehaviour
     public float pantherCooldown = 3f;
     public float hunterStunDuration = 5f;
     public float pantherSensitivity, hunterSensitivity;
+    private static readonly int Flash = Animator.StringToHash("Flash");
 
     // Start is called before the first frame update
     void Start()
@@ -187,16 +190,31 @@ public class PantherShooterGameSystem : MonoBehaviour
     
     IEnumerator PantherIFrame()
     {
+        SpriteRenderer pantherSpriteRenderer = panther.GetComponent<SpriteRenderer>();
+        Color transparent = new Color(1, 1, 1, 0.5f);
+        Color originalColor = pantherSpriteRenderer.color;
         pantherCollider.enabled = false;
+        pantherSpriteRenderer.color = transparent;
         yield return new WaitForSeconds(pantherSkillActivateTime);
         pantherCollider.enabled = true;
+        pantherSpriteRenderer.color = originalColor;
         StartCoroutine(PantherCooldown());
     }
 
     IEnumerator PantherSwap()
     {
         usedSwap = true;
+        flashImage.SetTrigger(Flash);
+        SpriteRenderer hunterSpriteRenderer = hunter.GetComponent<SpriteRenderer>();
+        SpriteRenderer pantherSpriteRenderer = panther.GetComponent<SpriteRenderer>();
+        Sprite originalHunter = hunterSpriteRenderer.sprite;
+        Sprite originalPanther = pantherSpriteRenderer.sprite;
+        hunterSpriteRenderer.sprite = swapSprites[0];
+        pantherSpriteRenderer.sprite = swapSprites[1];
         yield return new WaitForSeconds(pantherSkillActivateTime);
+        flashImage.SetTrigger(Flash);
+        hunterSpriteRenderer.sprite = originalHunter;
+        pantherSpriteRenderer.sprite = originalPanther;
         usedSwap = false;
         StartCoroutine(PantherCooldown());
     }
