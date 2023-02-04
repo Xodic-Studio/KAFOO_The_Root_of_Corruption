@@ -634,7 +634,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 698833636}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4bfaaa6b9a3bd5428d7c49c9d859fac, type: 3}
+  m_Script: {fileID: 11500000, guid: e5cb41f415424f341afb4fd0eac5a614, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   timeSpan: 30
@@ -1422,7 +1422,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 55
 --- !u!114 &1837065158
 MonoBehaviour:
   m_ObjectHideFlags: 0
