@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class PantherShooterGameSystem : MonoBehaviour
 {
@@ -17,6 +19,11 @@ public class PantherShooterGameSystem : MonoBehaviour
     private bool hunterShot;
     private bool pantherUsedSkill;
     private bool swapSkill;
+    public bool glueMode;
+    public float[] crosshairGlueRange;
+    public float[] pantherGlueRange;
+    public float glueTransformDuration;
+    public float glueInterval;
     private bool usedSwap;
     private bool stunned;
     public float crosshairActivateTime = 0.5f;
@@ -29,6 +36,10 @@ public class PantherShooterGameSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (glueMode)
+        {
+            InvokeRepeating("GlueMode", 2f, glueInterval);
+        }
         currentHp = hearts.Length;
         crosshair.transform.localScale = crosshairScale;
         crosshairCollider = crosshair.GetComponent<CircleCollider2D>();
@@ -42,18 +53,19 @@ public class PantherShooterGameSystem : MonoBehaviour
     {
         HunterControl();
         PantherControl();
+        RestrictMovement();
     }
 
     void HunterControl()
     {
-        Vector2 translation;
+        Vector2 translation = new Vector2();
         if (!usedSwap && !stunned)
         {
             translation = new Vector2(Input.GetAxis("Horizontal WASD") * hunterSensitivity,
                 Input.GetAxis("Vertical WASD") * hunterSensitivity) * Time.deltaTime;
             
         }
-        else
+        else if (usedSwap)
         {
             translation = new Vector2(Input.GetAxis("Horizontal Arrow") * pantherSensitivity,
                 Input.GetAxis("Vertical Arrow") * pantherSensitivity) * Time.deltaTime;
@@ -76,14 +88,11 @@ public class PantherShooterGameSystem : MonoBehaviour
         Vector2 translation;
         if (usedSwap)
         {
-            Debug.Log("SWAPPPP");
             translation = new Vector2(Input.GetAxis("Horizontal WASD") * hunterSensitivity,
                 Input.GetAxis("Vertical WASD") * hunterSensitivity) * Time.deltaTime;
-            
         }
         else
         {
-            Debug.Log("NOOO SWAPPPP");
             translation = new Vector2(Input.GetAxis("Horizontal Arrow") * pantherSensitivity,
                 Input.GetAxis("Vertical Arrow") * pantherSensitivity) * Time.deltaTime;
         }
@@ -105,12 +114,21 @@ public class PantherShooterGameSystem : MonoBehaviour
                         StartCoroutine(PantherSwap());
                         break;
                     case 4:
+                        StartCoroutine(PantherSwap());
                         break;
                 }
                 
             }
             
         }
+    }
+
+    void RestrictMovement()
+    {
+        crosshair.transform.localPosition = new Vector3(Mathf.Clamp(crosshair.transform.localPosition.x, -8.0f, 8.0f),
+            Mathf.Clamp(crosshair.transform.localPosition.y, -2.5f, 4.0f), crosshair.transform.localPosition.z);
+        panther.transform.localPosition = new Vector3(Mathf.Clamp(panther.transform.localPosition.x, -8.0f, 8.0f),
+            Mathf.Clamp(panther.transform.localPosition.y, -2.5f, 4.0f), panther.transform.localPosition.z);
     }
 
     IEnumerator HunterShoot()
@@ -136,6 +154,32 @@ public class PantherShooterGameSystem : MonoBehaviour
         yield return new WaitForSeconds(pantherSkillActivateTime);
         usedSwap = false;
         StartCoroutine(PantherCooldown());
+    }
+
+    void GlueMode()
+    {
+        StartCoroutine(ChangeScale());
+    }
+
+    IEnumerator ChangeScale()
+    {
+        Vector3 crosshairGlueScale = new Vector3(Random.Range(crosshairGlueRange[0], crosshairGlueRange[1]),
+            Random.Range(crosshairGlueRange[0], crosshairGlueRange[1]),
+            Random.Range(crosshairGlueRange[0], crosshairGlueRange[1]));
+        Vector3 pantherGlueScale = new Vector3(Random.Range(pantherGlueRange[0], pantherGlueRange[1]),
+            Random.Range(pantherGlueRange[0], pantherGlueRange[1]),
+            Random.Range(pantherGlueRange[0], pantherGlueRange[1]));
+        float maxTime = glueTransformDuration;
+        float lerpTime = 0f;
+        while (lerpTime < maxTime)
+        {
+            crosshair.transform.localScale =
+                Vector3.Lerp(crosshair.transform.localScale, crosshairGlueScale, lerpTime / maxTime);
+            panther.transform.localScale =
+                Vector3.Lerp(panther.transform.localScale, pantherGlueScale, lerpTime / maxTime);
+            lerpTime += Time.deltaTime;
+            yield return null;
+        }
     }
 
     IEnumerator HunterCooldown()

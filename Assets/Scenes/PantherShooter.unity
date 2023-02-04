@@ -632,9 +632,18 @@ MonoBehaviour:
   - {fileID: 1789724381}
   - {fileID: 584721262}
   currentHp: 0
+  glueMode: 1
+  crosshairGlueRange:
+  - 1
+  - 5
+  pantherGlueRange:
+  - 1
+  - 6
+  glueTransformDuration: 1
+  glueInterval: 3
   crosshairActivateTime: 0.1
   pantherSkillActivateTime: 5
-  hunterCooldown: 3
+  hunterCooldown: 10
   pantherCooldown: 3
   hunterStunDuration: 5
   pantherSensitivity: 10
