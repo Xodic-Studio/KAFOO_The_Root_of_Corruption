@@ -22,6 +22,14 @@ public class TimeSystem : MonoBehaviour
          timeLeft = Mathf.Clamp(timeLeft, 0, timeSpan);
 
          timeText.text = $"Time Left : {timeLeft:F0}";
+         if (timeLeft <= 10)
+         {
+             timeText.color = (int)timeLeft % 2 == 0 ? Color.white : Color.red;
+         }
+         else
+         {
+             timeText.color = Color.white;
+         }
      }
      
      
