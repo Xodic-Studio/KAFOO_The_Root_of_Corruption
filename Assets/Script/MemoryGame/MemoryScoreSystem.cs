@@ -48,6 +48,7 @@ public class MemoryScoreSystem : MonoBehaviour
             }
             finishScreenSystem.ShowScreen();
             showed = true;
+            MasterScript.Instance.minigamePlayCount[0]++;
             Invoke(nameof(ToSelectScene),5);
         }
         

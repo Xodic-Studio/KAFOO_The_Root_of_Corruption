@@ -24,6 +24,7 @@ public class MemoryGameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        currentLevelNumber = MasterScript.Instance.minigamePlayCount[0];
         Level currentLevel = allLevels[currentLevelNumber - 1];
         timeSystem.timeSpan = currentLevel.timeSpan;
         foreach (MemoryGameSystem mgs in memoryGameSystem)

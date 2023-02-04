@@ -182,6 +182,10 @@ public class MemoryGameSystem : MonoBehaviour
         }
     }
 
+    void WaitBeforePlay()
+    {
+        StartCoroutine(PlaySequence(sequenceIndices));
+    }
     void InputCheck(int buttonIndex, List<int> sequence)
     {
         if (CompareSequence(sequence, userSequence) == 0)
@@ -193,7 +197,7 @@ public class MemoryGameSystem : MonoBehaviour
             { 
                 ReturnToOriginal();
             }
-            StartCoroutine(PlaySequence(sequence));
+            Invoke("WaitBeforePlay", 1f);
         }
         else if (CompareSequence(sequence, userSequence) == 1)
         {
@@ -212,7 +216,7 @@ public class MemoryGameSystem : MonoBehaviour
             { 
                 ReturnToOriginal();
             }
-            StartCoroutine(PlaySequence(sequenceIndices));
+            Invoke("WaitBeforePlay", 1f);
         }
     }
 

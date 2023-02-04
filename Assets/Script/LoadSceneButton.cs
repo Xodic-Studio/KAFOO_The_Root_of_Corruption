@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 
@@ -6,14 +7,14 @@ using UnityEngine.UI;
 public class LoadSceneButton : MonoBehaviour
 {
     private Button button;
-    [SerializeField] private SceneName SceneName;
+    [SerializeField] private SceneName sceneName;
     
     private void Start()
     {
         button = GetComponent<Button>();
         button.onClick.AddListener(delegate
         {
-            LoadSceneManager.Instance.LoadScene(this.SceneName);
+            LoadSceneManager.Instance.LoadScene(sceneName);
         });
     }
 }

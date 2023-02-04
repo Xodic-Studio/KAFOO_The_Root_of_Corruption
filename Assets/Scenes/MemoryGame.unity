@@ -158,7 +158,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 55
 --- !u!114 &204591571
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -706,8 +706,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 562037390}
-  - component: {fileID: 562037389}
   - component: {fileID: 562037391}
+  - component: {fileID: 562037389}
   m_Layer: 0
   m_Name: Main Controller
   m_TagString: Untagged

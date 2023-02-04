@@ -8,6 +8,7 @@ public enum SceneName
     Selection,
     RabbitPress,
     MemoryGame,
+    PantherShooter,
     Quit
 }
 

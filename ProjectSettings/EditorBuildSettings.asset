@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MemoryGame.unity
     guid: cb25ef30f5bead040a1b1efdb83f5eb1
+  - enabled: 1
+    path: Assets/Scenes/PantherShooter.unity
+    guid: 801b397e583c23740aebf8d829dc9374
   m_configObjects: {}

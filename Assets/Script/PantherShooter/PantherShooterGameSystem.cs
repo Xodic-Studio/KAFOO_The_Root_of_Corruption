@@ -107,6 +107,7 @@ public class PantherShooterGameSystem : MonoBehaviour
                 }
                 finishScreenSystem.ShowScreen();
                 finishShowed = true;
+                MasterScript.Instance.minigamePlayCount[3]++;
                 Invoke(nameof(ToSelectScene),5);
             }
         }
@@ -160,9 +161,9 @@ public class PantherShooterGameSystem : MonoBehaviour
     void RestrictMovement()
     {
         crosshair.transform.localPosition = new Vector3(Mathf.Clamp(crosshair.transform.localPosition.x, -8.0f, 8.0f),
-            Mathf.Clamp(crosshair.transform.localPosition.y, -2.5f, 4.0f), crosshair.transform.localPosition.z);
+            Mathf.Clamp(crosshair.transform.localPosition.y, -1.5f, 4.0f), crosshair.transform.localPosition.z);
         panther.transform.localPosition = new Vector3(Mathf.Clamp(panther.transform.localPosition.x, -8.0f, 8.0f),
-            Mathf.Clamp(panther.transform.localPosition.y, -2.5f, 4.0f), panther.transform.localPosition.z);
+            Mathf.Clamp(panther.transform.localPosition.y, -1.5f, 4.0f), panther.transform.localPosition.z);
     }
 
     IEnumerator HunterShoot()
@@ -277,6 +278,7 @@ public class PantherShooterGameSystem : MonoBehaviour
             MasterScript.Instance.p1Score++;
             finishScreenSystem.ShowScreen();
             finishShowed = true;
+            MasterScript.Instance.minigamePlayCount[3]++;
             Invoke(nameof(ToSelectScene),5);
         }
     }

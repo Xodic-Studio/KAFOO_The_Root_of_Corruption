@@ -25,6 +25,7 @@ public class GameSystem : MonoBehaviour
 
     private void Start()
     {
+        level = MasterScript.Instance.minigamePlayCount[2];
         switch (level)
         {
             case 1:
@@ -102,6 +103,7 @@ public class GameSystem : MonoBehaviour
             
             finishScreenSystem.ShowScreen();
             showed = true;
+            MasterScript.Instance.minigamePlayCount[2]++;
             Invoke(nameof(ToSelectScene),5f);
         }
     }

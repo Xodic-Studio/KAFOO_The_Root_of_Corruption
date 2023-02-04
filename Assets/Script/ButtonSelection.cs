@@ -20,9 +20,8 @@ public class ButtonSelection : MonoBehaviour
         if (Input.GetAxisRaw("Horizontal") != 0 && !isSelecting) StartCoroutine(SelectButton());
         
 
-        if (Input.GetButtonDown("Submit")) buttons[selectedButton].onClick.Invoke();
+        if (Input.GetKeyDown(KeyCode.Space)|| Input.GetKeyDown(KeyCode.RightControl)) buttons[selectedButton].onClick.Invoke();
     }
-
     private IEnumerator SelectButton()
     {
         isSelecting = true;

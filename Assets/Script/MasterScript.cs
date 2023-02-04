@@ -15,6 +15,7 @@ public class MasterScript : Singleton<MasterScript>
     public int p1Score = 0;
     public int p2Score = 0;
     public bool isGameStarted = false;
+    public List<int> minigamePlayCount = new List<int>() {1, 1, 1, 1};
 
     public void Start()
     {
