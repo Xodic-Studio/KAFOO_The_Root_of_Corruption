@@ -10,12 +10,15 @@ public class PantherShooterGameSystem : MonoBehaviour
     public int levelNum = 1;
     public GameObject panther, hunter;
     public GameObject crosshair;
+    public GameObject finishScreenPrefab;
     public Vector3 crosshairScale;
+    private GameObject canvas;
     public Image[] hearts;
     [SerializeField] private int currentHp;
     private CircleCollider2D crosshairCollider;
     private BoxCollider2D pantherCollider;
     private Animator crosshairAnimator;
+    public TimeSystem timeSystem;
     private bool hunterShot;
     private bool pantherUsedSkill;
     private bool swapSkill;
@@ -26,6 +29,7 @@ public class PantherShooterGameSystem : MonoBehaviour
     public float glueInterval;
     private bool usedSwap;
     private bool stunned;
+    private bool finishShowed = false;
     public float crosshairActivateTime = 0.5f;
     public float pantherSkillActivateTime = 0.5f;
     public float hunterCooldown = 3f;
@@ -40,6 +44,7 @@ public class PantherShooterGameSystem : MonoBehaviour
         {
             InvokeRepeating("GlueMode", 2f, glueInterval);
         }
+        canvas = GameObject.Find("Canvas");
         currentHp = hearts.Length;
         crosshair.transform.localScale = crosshairScale;
         crosshairCollider = crosshair.GetComponent<CircleCollider2D>();
@@ -54,6 +59,7 @@ public class PantherShooterGameSystem : MonoBehaviour
         HunterControl();
         PantherControl();
         RestrictMovement();
+        WinConditionCheck();
     }
 
     void HunterControl()
@@ -81,6 +87,34 @@ public class PantherShooterGameSystem : MonoBehaviour
             }
             
         }
+    }
+
+    void WinConditionCheck()
+    {
+        if (timeSystem.timeLeft <= 0)
+        {
+            if (!finishShowed)
+            {
+                GameObject finishScreen = Instantiate(finishScreenPrefab, canvas.transform);
+                FinishScreen finishScreenSystem = finishScreen.GetComponent<FinishScreen>();
+                if (currentHp > 0)
+                {
+                    MasterScript.Instance.p2Score++;
+                }
+                else
+                {
+                    MasterScript.Instance.p1Score++;
+                }
+                finishScreenSystem.ShowScreen();
+                finishShowed = true;
+                Invoke(nameof(ToSelectScene),5);
+            }
+        }
+    }
+    
+    void ToSelectScene()
+    {
+        LoadSceneManager.Instance.LoadScene(SceneName.Selection);
     }
     
     void PantherControl()
@@ -234,6 +268,16 @@ public class PantherShooterGameSystem : MonoBehaviour
             currentHp -= 1;
             currentHp = Mathf.Clamp(currentHp, 0, hearts.Length);
             hearts[currentHp].enabled = false;
+        }
+
+        if (currentHp <= 0)
+        {
+            GameObject finishScreen = Instantiate(finishScreenPrefab, canvas.transform);
+            FinishScreen finishScreenSystem = finishScreen.GetComponent<FinishScreen>();
+            MasterScript.Instance.p1Score++;
+            finishScreenSystem.ShowScreen();
+            finishShowed = true;
+            Invoke(nameof(ToSelectScene),5);
         }
     }
 }
