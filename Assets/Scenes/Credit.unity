@@ -2593,7 +2593,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee5c737acb207c74db2061cb00d91592, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skipKeys: 1b00000008000000
+  skipKeys: 3101000020000000
 --- !u!1 &1324002820
 GameObject:
   m_ObjectHideFlags: 0
