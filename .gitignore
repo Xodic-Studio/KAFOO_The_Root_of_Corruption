@@ -63,3 +63,5 @@ crashlytics-build.properties
 
 
 .idea/.idea.KAFOO_The_Root_of_Corruption/.idea/discord.xml
+
+*.ini

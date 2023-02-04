@@ -249,6 +249,7 @@ MonoBehaviour:
   - {fileID: 618819405}
   selectedButton: 0
   isSelecting: 0
+  isVertical: 0
 --- !u!114 &20241188
 MonoBehaviour:
   m_ObjectHideFlags: 0

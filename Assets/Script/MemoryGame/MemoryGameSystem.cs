@@ -93,7 +93,7 @@ public class MemoryGameSystem : MonoBehaviour
         }
     }
 
-    void UserInputUp()
+    private void UserInputUp()
     {
         if (Input.GetKeyUp(playerControl[0]))
         {
@@ -121,7 +121,7 @@ public class MemoryGameSystem : MonoBehaviour
         }
     }
 
-    void CheckCombo()
+    private void CheckCombo()
     {
         if (playerCombo >= countToIncreseLength)
         {
@@ -130,18 +130,18 @@ public class MemoryGameSystem : MonoBehaviour
             currentSequenceLength = Mathf.Clamp(currentSequenceLength, minSequenceLength, maxSequenceLength);
         }
     }
-    
-    void ButtonFeedback(int index, string name, bool state)
+
+    private void ButtonFeedback(int index, string name, bool state)
     {
         memoryAnimators[index].SetBool(name, state);
     }
 
-    void ButtonFeedback(int index)
+    private void ButtonFeedback(int index)
     {
         memoryAnimators[index].SetTrigger(Initial);
     }
 
-    IEnumerator PlaySequence(List<int> sequence)
+    private IEnumerator PlaySequence(List<int> sequence)
     {
         foreach (int i in sequence)
         {
@@ -155,7 +155,7 @@ public class MemoryGameSystem : MonoBehaviour
         allowInput = true;
     }
 
-    IEnumerator SwapPosition()
+    private IEnumerator SwapPosition()
     {
         List<int> randomList = new List<int> { 0, 1, 2, 3 };
         for (int i = 0; i < memorySprites.Length; i++)
@@ -174,7 +174,7 @@ public class MemoryGameSystem : MonoBehaviour
         } 
     }
 
-    void ReturnToOriginal()
+    private void ReturnToOriginal()
     {
         for (int i = 0; i < memorySprites.Length; i++)
         {
@@ -191,7 +191,7 @@ public class MemoryGameSystem : MonoBehaviour
         }
     }
 
-    void WaitBeforePlay()
+    private void WaitBeforePlay()
     {
         StartCoroutine(PlaySequence(sequenceIndices));
     }
