@@ -16,6 +16,7 @@ public class PressSystem : MonoBehaviour
     [SerializeField] private List<KeyCode> keys;
     [SerializeField] public int pressGoal;
     [HideInInspector] public int pressCount;
+    public TimeSystem timeSystem;
     
     private KeyCode keyBefore;
     [SerializeField] private List<KeyCode> otherKey;
@@ -35,7 +36,8 @@ public class PressSystem : MonoBehaviour
 
     void Update()
     {
-        if(!pressAble) return;
+        if (!timeSystem.gameStart) return;
+        if (!pressAble) return;
         foreach (var k in otherKey)
         {
             if (Input.GetKeyDown(k))

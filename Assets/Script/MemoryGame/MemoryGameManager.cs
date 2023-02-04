@@ -6,6 +6,13 @@ public class MemoryGameManager : MonoBehaviour
 {
 
     public int currentLevelNumber = 1;
+    public GameObject popUpPrefab;
+    private PopUpSystem popUpSystem;
+    public TutorialImage tutorialImageSO;
+    private bool setUpSystem = false;
+    public int popUpImageIndex = 0;
+    private GameObject canvas;
+    private bool popUped;
     struct Level
     {
         public float timeSpan;
@@ -25,6 +32,12 @@ public class MemoryGameManager : MonoBehaviour
     void Start()
     {
         currentLevelNumber = MasterScript.Instance.minigamePlayCount[0];
+        popUpImageIndex = currentLevelNumber - 1;
+        canvas = GameObject.Find("Canvas");
+        popUpSystem = Instantiate(popUpPrefab, canvas.transform).GetComponent<PopUpSystem>();
+        popUpSystem.imageIndex = popUpImageIndex;
+        popUpSystem.tutorialImageSO = tutorialImageSO;
+        popUpSystem.ShowPopUp();
         Level currentLevel = allLevels[currentLevelNumber - 1];
         timeSystem.timeSpan = currentLevel.timeSpan;
         foreach (MemoryGameSystem mgs in memoryGameSystem)
@@ -39,6 +52,20 @@ public class MemoryGameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.RightControl)) && !popUped)
+        {
+            popUped = true;
+            popUpSystem.ClosePopUp();
+            timeSystem.gameStart = true;
+            if (!setUpSystem)
+            {
+                foreach (MemoryGameSystem mgs in memoryGameSystem)
+                {
+                    mgs.SetUpSystem();
+                }
+
+                setUpSystem = true;
+            }
+        }
     }
 }

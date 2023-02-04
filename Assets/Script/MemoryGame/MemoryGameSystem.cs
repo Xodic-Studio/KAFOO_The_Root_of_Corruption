@@ -12,6 +12,7 @@ public class MemoryGameSystem : MonoBehaviour
     //2 = s
     //3 = d
     public MemoryScoreSystem memoryScoreSystem;
+    public TimeSystem timeSystem;
     public Image[] memorySprites;
     private Vector3[] memoryOriginalPositions;
     private Animator[] memoryAnimators;
@@ -32,6 +33,11 @@ public class MemoryGameSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
+    }
+
+    public void SetUpSystem()
+    {
         memoryAnimators = new Animator[memorySprites.Length];
         memoryOriginalPositions = new Vector3[memorySprites.Length];
         for (int i = 0; i < memorySprites.Length; i++)
@@ -50,6 +56,10 @@ public class MemoryGameSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!timeSystem.gameStart)
+        {
+            return;
+        }
         UserInput();
         UserInputUp();
         CheckCombo();

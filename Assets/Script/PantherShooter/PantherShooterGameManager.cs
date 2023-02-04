@@ -5,6 +5,13 @@ using UnityEngine;
 public class PantherShooterGameManager : MonoBehaviour
 {
     public int currentLevelNumber = 1;
+    public GameObject popUpPrefab;
+    private PopUpSystem popUpSystem;
+    public TutorialImage tutorialImageSO;
+    public int popUpImageIndex = 0;
+    private GameObject canvas;
+    private bool popUped;
+    private bool setUpSystem = false;
     struct Level
     {
         public Vector3 crosshairScale;
@@ -27,6 +34,12 @@ public class PantherShooterGameManager : MonoBehaviour
     void Start()
     {
         currentLevelNumber = MasterScript.Instance.minigamePlayCount[3];
+        popUpImageIndex = currentLevelNumber - 1;
+        canvas = GameObject.Find("Canvas");
+        popUpSystem = Instantiate(popUpPrefab, canvas.transform).GetComponent<PopUpSystem>();
+        popUpSystem.imageIndex = popUpImageIndex;
+        popUpSystem.tutorialImageSO = tutorialImageSO;
+        popUpSystem.ShowPopUp();
         Level currentLevel = allLevels[currentLevelNumber - 1];
         timeSystem.timeSpan = currentLevel.timeSpan;
         pantherShooterGameSystem.levelNum = currentLevelNumber;
@@ -36,5 +49,20 @@ public class PantherShooterGameManager : MonoBehaviour
         pantherShooterGameSystem.pantherSkillActivateTime = currentLevel.pantherSkillTime;
         pantherShooterGameSystem.pantherCooldown = currentLevel.pantherSkillCooldown;
         pantherShooterGameSystem.glueMode = currentLevel.glueMode;
+    }
+
+    void Update()
+    {
+        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.RightControl)) && !popUped)
+        {
+            popUped = true;
+            popUpSystem.ClosePopUp();
+            timeSystem.gameStart = true;
+            if (!setUpSystem)
+            {
+                pantherShooterGameSystem.SetUp();
+                setUpSystem = true;
+            }
+        }
     }
 }
