@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - Heart
+  - Panther
   layers:
   - Default
   - TransparentFX
@@ -45,4 +46,7 @@ TagManager:
     locked: 0
   - name: bg
     uniqueID: 2693891089
+    locked: 0
+  - name: play
+    uniqueID: 2523782419
     locked: 0
