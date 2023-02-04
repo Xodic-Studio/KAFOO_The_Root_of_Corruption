@@ -66,6 +66,8 @@ public class PopUpSystem : MonoBehaviour
     {
         backdrop.color = backdropEndColor;
         background.rectTransform.localPosition = backgroundEndPosition;
+        backdrop.gameObject.SetActive(false);
+        background.gameObject.SetActive(false);
         float maxTime = 1.5f;
         float lerpTime = 0f;
         Color transparent = new Color(1, 1, 1, 0);
