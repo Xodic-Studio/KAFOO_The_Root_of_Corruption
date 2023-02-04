@@ -44,6 +44,7 @@ public class PauseSystem : MonoBehaviour
             }
             if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.RightControl)))
             {
+                Time.timeScale = 1;
                 LoadSceneManager.Instance.LoadScene(SceneName.Selection);
             }
         }
