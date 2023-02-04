@@ -459,7 +459,7 @@ RectTransform:
   m_GameObject: {fileID: 482339565}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 10.625, y: 5.2516, z: 5.2516}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1510431224}
@@ -468,7 +468,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 38}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &482339567
@@ -491,7 +491,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: -2135189851, guid: 256594cde808a594294d65a6f871b94b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5953,7 +5953,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.13071728, g: 1, b: 0, a: 1}
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -6309,7 +6309,6 @@ MonoBehaviour:
   particleObjects:
   - {fileID: 6773874663568786590, guid: 9f9b75e1b0cb59346ba939245edcbc66, type: 3}
   - {fileID: 2722190170797999402, guid: 04796acbd1d419948a72c4bb0f8ef776, type: 3}
-  - {fileID: 3367395655415924541, guid: ac36fa7843672b84f809af95a9365d15, type: 3}
   spawnCount: 5
   xRange:
   - 0
@@ -11441,9 +11440,7 @@ MonoBehaviour:
   pressGoal: 0
   spawnPosition: {fileID: 482339566}
   particleObjects:
-  - {fileID: 2722190170797999402, guid: 04796acbd1d419948a72c4bb0f8ef776, type: 3}
-  - {fileID: 6773874663568786590, guid: 9f9b75e1b0cb59346ba939245edcbc66, type: 3}
-  - {fileID: 3367395655415924541, guid: ac36fa7843672b84f809af95a9365d15, type: 3}
+  - {fileID: 124482446794365372, guid: e701be46d59f2284cbe05b7f5f34c09f, type: 3}
   spawnCount: 5
   xRange:
   - -500

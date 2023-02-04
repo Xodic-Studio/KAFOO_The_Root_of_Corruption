@@ -64,6 +64,8 @@ public class PopUpSystem : MonoBehaviour
 
     private IEnumerator FadeOut(TimeSystem timeSystem)
     {
+        backdrop.color = backdropEndColor;
+        background.rectTransform.localPosition = backgroundEndPosition;
         float maxTime = 1.5f;
         float lerpTime = 0f;
         Color transparent = new Color(1, 1, 1, 0);
