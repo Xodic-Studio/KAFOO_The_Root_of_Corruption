@@ -10,7 +10,8 @@ public enum SceneName
     VampireSurvival,
     MemoryGame,
     PantherShooter,
-    Quit
+    Credit,
+    Quit,
 }
 
 public class LoadSceneManager : Singleton<LoadSceneManager>
