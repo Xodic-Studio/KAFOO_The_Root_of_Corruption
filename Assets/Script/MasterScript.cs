@@ -15,6 +15,7 @@ public class MasterScript : Singleton<MasterScript>
     public int p1Score = 0;
     public int p2Score = 0;
     public bool isGameStarted = false;
+    public bool isInGame = false;
     public List<int> minigamePlayCount = new List<int>() {1, 1, 1, 1};
 
     public void Start()
@@ -24,6 +25,7 @@ public class MasterScript : Singleton<MasterScript>
     public void StartGame()
     {
         isGameStarted = true;
+        isInGame = false;
     }
     
     public void Update()
@@ -49,6 +51,7 @@ public class MasterScript : Singleton<MasterScript>
     private void CheckCondition()
     {
         if (!(timeLeft <= 0)) return;
+        if (isInGame) return;
         if (p1Score > p2Score)
         {
             Debug.Log("P1 Win");

@@ -26,6 +26,7 @@ public class VampireSurvivorsGameManager : MonoBehaviour
 
     private void Start()
     {
+        MasterScript.Instance.isInGame = true;
         dificultLevel = MasterScript.Instance.minigamePlayCount[1];
         popUpImageIndex = dificultLevel - 1;
         canvas = GameObject.Find("Canvas");

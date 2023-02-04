@@ -22,15 +22,16 @@ public class CreditScript : MonoBehaviour
             LoadSceneManager sceneManager = new LoadSceneManager();
             sceneManager.LoadScene(SceneName.Menu);
         }
-
+        
+        /* Auto Skip When End
+         
         if (!AnimatorIsPlaying())
         {
             animator.SetBool("isSkip", true);
             LoadSceneManager sceneManager = new LoadSceneManager();
             sceneManager.LoadScene(SceneName.Menu);
         }
-
-        
+        */
     }
     
     bool AnimatorIsPlaying()

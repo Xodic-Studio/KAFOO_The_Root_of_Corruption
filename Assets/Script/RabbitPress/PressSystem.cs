@@ -60,7 +60,7 @@ public class PressSystem : MonoBehaviour
         }
         if (Input.GetKeyDown(key))
         {
-            GetComponent<Image>().color = Color.black;
+            GetComponent<Image>().color = Color.gray;
             
             // change key & key sprite
             if (Random.Range(0, 100) < changeKeyRate)
