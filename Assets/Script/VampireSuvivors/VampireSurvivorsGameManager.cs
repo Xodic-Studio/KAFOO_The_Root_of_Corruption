@@ -34,38 +34,10 @@ public class VampireSurvivorsGameManager : MonoBehaviour
         popUpSystem.imageIndex = popUpImageIndex;
         popUpSystem.tutorialImageSO = tutorialImageSO;
         popUpSystem.ShowPopUp();
-        switch (dificultLevel)
-        {
-            case 1:
-            {
-                spawnEnemyZone.AssignData(gameSystemData[0]);
-                goodPlayer.AssignData(gameSystemData[0]);
-                time.timeSpan = gameSystemData[0].timeSpan;
-                break;
-            }
-            case 2:
-            {
-                spawnEnemyZone.AssignData(gameSystemData[1]);
-                goodPlayer.AssignData(gameSystemData[1]);
-                time.timeSpan = gameSystemData[1].timeSpan;
-                break;
-            }
-            case 3:
-            {
-                spawnEnemyZone.AssignData(gameSystemData[2]);
-                goodPlayer.AssignData(gameSystemData[2]);
-                time.timeSpan = gameSystemData[2].timeSpan;
-                break;
-                
-            }
-            case 4:
-            {
-                spawnEnemyZone.AssignData(gameSystemData[3]);
-                goodPlayer.AssignData(gameSystemData[3]);
-                time.timeSpan = gameSystemData[3].timeSpan;
-                break;
-            }
-        }
+        
+        spawnEnemyZone.AssignData(gameSystemData[dificultLevel - 1]);
+        goodPlayer.AssignData(gameSystemData[dificultLevel - 1]);
+        time.timeSpan = gameSystemData[dificultLevel - 1].timeSpan;
     }
     
     private void Update()

@@ -52,7 +52,7 @@ public class PressSystem : MonoBehaviour
             if (Input.GetKeyDown(k))
             {
                 pressAble = false;
-                Invoke(nameof(TurnOnPress), 1f);
+                Invoke(nameof(TurnOnPress), 1.5f);
                 Debug.Log("Wrong Key");
                 GetComponent<Image>().color = Color.red;
                 return;

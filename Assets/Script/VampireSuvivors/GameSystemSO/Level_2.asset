@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: 2
   unitAmount: 3
-  badPlayerStaminaRegen: 1
+  badPlayerStaminaRegen: 0.1
   goodPlayerHp: 6
-  goodPlayerStaminaRegen: 2.5
+  goodPlayerStaminaRegen: 0.25
   timeSpan: 65
+  goodPlayerFireRate: 0.15
