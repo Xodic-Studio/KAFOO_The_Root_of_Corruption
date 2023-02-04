@@ -10,6 +10,10 @@ public class SelectUI : MonoBehaviour
 
     private void Start()
     {
+        for (int i = 0; i < MasterScript.Instance.minigamePlayCount.Count; i++)
+        {
+            MasterScript.Instance.minigamePlayCount[i] = Mathf.Clamp(MasterScript.Instance.minigamePlayCount[i], 1, 4);
+        }
         MasterScript.Instance.StartGame();
         score1Text.text = $"Score 1\n{MasterScript.Instance.p1Score}";
         score2Text.text = $"Score 2\n{MasterScript.Instance.p2Score}";
