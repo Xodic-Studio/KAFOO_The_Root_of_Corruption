@@ -133,7 +133,6 @@ public class MemoryGameSystem : MonoBehaviour
 
     IEnumerator PlaySequence(List<int> sequence)
     {
-        allowInput = false;
         foreach (int i in sequence)
         {
             ButtonFeedback(i);
@@ -190,6 +189,7 @@ public class MemoryGameSystem : MonoBehaviour
     {
         if (CompareSequence(sequence, userSequence) == 0)
         {
+            allowInput = false;
             Debug.Log("wrong!!");
             userSequence.Clear();
             ButtonFeedback(buttonIndex, "Wrong", true);
@@ -197,7 +197,7 @@ public class MemoryGameSystem : MonoBehaviour
             { 
                 ReturnToOriginal();
             }
-            Invoke("WaitBeforePlay", 1f);
+            Invoke(nameof(WaitBeforePlay), 1f);
         }
         else if (CompareSequence(sequence, userSequence) == 1)
         {
@@ -206,6 +206,7 @@ public class MemoryGameSystem : MonoBehaviour
         }
         else
         {
+            allowInput = false;
             Debug.Log("All correct");
             memoryScoreSystem.IncreaseScore(playerNum, 1);
             userSequence.Clear();
@@ -216,7 +217,7 @@ public class MemoryGameSystem : MonoBehaviour
             { 
                 ReturnToOriginal();
             }
-            Invoke("WaitBeforePlay", 1f);
+            Invoke(nameof(WaitBeforePlay), 1f);
         }
     }
 
