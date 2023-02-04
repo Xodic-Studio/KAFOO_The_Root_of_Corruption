@@ -1,24 +1,35 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class PantherShooterGameSystem : MonoBehaviour
 {
     public int levelNum = 1;
     public GameObject panther, hunter;
     public GameObject crosshair;
+    public GameObject finishScreenPrefab;
     public Vector3 crosshairScale;
+    private GameObject canvas;
     public Image[] hearts;
     [SerializeField] private int currentHp;
     private CircleCollider2D crosshairCollider;
     private BoxCollider2D pantherCollider;
     private Animator crosshairAnimator;
+    public TimeSystem timeSystem;
     private bool hunterShot;
     private bool pantherUsedSkill;
     private bool swapSkill;
+    public bool glueMode;
+    public float[] crosshairGlueRange;
+    public float[] pantherGlueRange;
+    public float glueTransformDuration;
+    public float glueInterval;
     private bool usedSwap;
     private bool stunned;
+    private bool finishShowed = false;
     public float crosshairActivateTime = 0.5f;
     public float pantherSkillActivateTime = 0.5f;
     public float hunterCooldown = 3f;
@@ -29,6 +40,11 @@ public class PantherShooterGameSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (glueMode)
+        {
+            InvokeRepeating("GlueMode", 2f, glueInterval);
+        }
+        canvas = GameObject.Find("Canvas");
         currentHp = hearts.Length;
         crosshair.transform.localScale = crosshairScale;
         crosshairCollider = crosshair.GetComponent<CircleCollider2D>();
@@ -42,18 +58,20 @@ public class PantherShooterGameSystem : MonoBehaviour
     {
         HunterControl();
         PantherControl();
+        RestrictMovement();
+        WinConditionCheck();
     }
 
     void HunterControl()
     {
-        Vector2 translation;
+        Vector2 translation = new Vector2();
         if (!usedSwap && !stunned)
         {
             translation = new Vector2(Input.GetAxis("Horizontal WASD") * hunterSensitivity,
                 Input.GetAxis("Vertical WASD") * hunterSensitivity) * Time.deltaTime;
             
         }
-        else
+        else if (usedSwap)
         {
             translation = new Vector2(Input.GetAxis("Horizontal Arrow") * pantherSensitivity,
                 Input.GetAxis("Vertical Arrow") * pantherSensitivity) * Time.deltaTime;
@@ -70,20 +88,45 @@ public class PantherShooterGameSystem : MonoBehaviour
             
         }
     }
+
+    void WinConditionCheck()
+    {
+        if (timeSystem.timeLeft <= 0)
+        {
+            if (!finishShowed)
+            {
+                GameObject finishScreen = Instantiate(finishScreenPrefab, canvas.transform);
+                FinishScreen finishScreenSystem = finishScreen.GetComponent<FinishScreen>();
+                if (currentHp > 0)
+                {
+                    MasterScript.Instance.p2Score++;
+                }
+                else
+                {
+                    MasterScript.Instance.p1Score++;
+                }
+                finishScreenSystem.ShowScreen();
+                finishShowed = true;
+                Invoke(nameof(ToSelectScene),5);
+            }
+        }
+    }
+    
+    void ToSelectScene()
+    {
+        LoadSceneManager.Instance.LoadScene(SceneName.Selection);
+    }
     
     void PantherControl()
     {
         Vector2 translation;
         if (usedSwap)
         {
-            Debug.Log("SWAPPPP");
             translation = new Vector2(Input.GetAxis("Horizontal WASD") * hunterSensitivity,
                 Input.GetAxis("Vertical WASD") * hunterSensitivity) * Time.deltaTime;
-            
         }
         else
         {
-            Debug.Log("NOOO SWAPPPP");
             translation = new Vector2(Input.GetAxis("Horizontal Arrow") * pantherSensitivity,
                 Input.GetAxis("Vertical Arrow") * pantherSensitivity) * Time.deltaTime;
         }
@@ -105,12 +148,21 @@ public class PantherShooterGameSystem : MonoBehaviour
                         StartCoroutine(PantherSwap());
                         break;
                     case 4:
+                        StartCoroutine(PantherSwap());
                         break;
                 }
                 
             }
             
         }
+    }
+
+    void RestrictMovement()
+    {
+        crosshair.transform.localPosition = new Vector3(Mathf.Clamp(crosshair.transform.localPosition.x, -8.0f, 8.0f),
+            Mathf.Clamp(crosshair.transform.localPosition.y, -2.5f, 4.0f), crosshair.transform.localPosition.z);
+        panther.transform.localPosition = new Vector3(Mathf.Clamp(panther.transform.localPosition.x, -8.0f, 8.0f),
+            Mathf.Clamp(panther.transform.localPosition.y, -2.5f, 4.0f), panther.transform.localPosition.z);
     }
 
     IEnumerator HunterShoot()
@@ -136,6 +188,32 @@ public class PantherShooterGameSystem : MonoBehaviour
         yield return new WaitForSeconds(pantherSkillActivateTime);
         usedSwap = false;
         StartCoroutine(PantherCooldown());
+    }
+
+    void GlueMode()
+    {
+        StartCoroutine(ChangeScale());
+    }
+
+    IEnumerator ChangeScale()
+    {
+        Vector3 crosshairGlueScale = new Vector3(Random.Range(crosshairGlueRange[0], crosshairGlueRange[1]),
+            Random.Range(crosshairGlueRange[0], crosshairGlueRange[1]),
+            Random.Range(crosshairGlueRange[0], crosshairGlueRange[1]));
+        Vector3 pantherGlueScale = new Vector3(Random.Range(pantherGlueRange[0], pantherGlueRange[1]),
+            Random.Range(pantherGlueRange[0], pantherGlueRange[1]),
+            Random.Range(pantherGlueRange[0], pantherGlueRange[1]));
+        float maxTime = glueTransformDuration;
+        float lerpTime = 0f;
+        while (lerpTime < maxTime)
+        {
+            crosshair.transform.localScale =
+                Vector3.Lerp(crosshair.transform.localScale, crosshairGlueScale, lerpTime / maxTime);
+            panther.transform.localScale =
+                Vector3.Lerp(panther.transform.localScale, pantherGlueScale, lerpTime / maxTime);
+            lerpTime += Time.deltaTime;
+            yield return null;
+        }
     }
 
     IEnumerator HunterCooldown()
@@ -190,6 +268,16 @@ public class PantherShooterGameSystem : MonoBehaviour
             currentHp -= 1;
             currentHp = Mathf.Clamp(currentHp, 0, hearts.Length);
             hearts[currentHp].enabled = false;
+        }
+
+        if (currentHp <= 0)
+        {
+            GameObject finishScreen = Instantiate(finishScreenPrefab, canvas.transform);
+            FinishScreen finishScreenSystem = finishScreen.GetComponent<FinishScreen>();
+            MasterScript.Instance.p1Score++;
+            finishScreenSystem.ShowScreen();
+            finishShowed = true;
+            Invoke(nameof(ToSelectScene),5);
         }
     }
 }
