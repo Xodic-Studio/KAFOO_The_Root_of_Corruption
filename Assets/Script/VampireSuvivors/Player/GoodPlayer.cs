@@ -20,6 +20,11 @@ public class GoodPlayer : MonoBehaviour
     [SerializeField] private float maxStamina = 10f;
     public float stamina;
 
+    public void AssignData(GameSystemData gameSystemData)
+    {
+        hp = gameSystemData.goodPlayerHp;
+        stamina = gameSystemData.goodPlayerStaminaRegen;
+    }
     void Start()
     {
         nextFire = 0;

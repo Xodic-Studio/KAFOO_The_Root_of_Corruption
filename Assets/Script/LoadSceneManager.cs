@@ -7,6 +7,7 @@ public enum SceneName
     Menu,
     Selection,
     RabbitPress,
+    VampireSurvival,
     MemoryGame,
     PantherShooter,
     Quit
@@ -16,7 +17,7 @@ public class LoadSceneManager : Singleton<LoadSceneManager>
 {
     public void LoadScene(SceneName sceneName)
     {
-        if ((sceneName == SceneName.Quit))
+        if (sceneName == SceneName.Quit)
         {
             Debug.Log("Quit");
             Application.Quit();

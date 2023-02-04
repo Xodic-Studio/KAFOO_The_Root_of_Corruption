@@ -574,7 +574,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0379b8c365be1d448cfac9c65aa24ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 0
+  spawnEnemyZone: {fileID: 1110582877}
+  goodPlayer: {fileID: 1662564309}
+  time: {fileID: 1917953255}
+  gameSystemData:
+  - {fileID: 11400000, guid: 4b7c629bfef24ad4896647a1dd886d91, type: 2}
+  - {fileID: 11400000, guid: c8e295ef9c0751c44a13ba8979079efd, type: 2}
+  - {fileID: 11400000, guid: 20cc3daf8cd28584696f4d12b4cd44a3, type: 2}
+  - {fileID: 11400000, guid: 6d7daf220e3d5a249b7d02f163697da1, type: 2}
+  dificultLevel: 1
 --- !u!1 &638825842
 GameObject:
   m_ObjectHideFlags: 0
@@ -1033,6 +1041,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 316b0d4c4d2017b45adf802fb6a1196a, type: 2}
   - {fileID: 11400000, guid: f18c51f138d01f044890122fa0d40bc8, type: 2}
   - {fileID: 11400000, guid: c9f7dce71bcc38841a15f1aa371a0095, type: 2}
+  skillImages:
+  - {fileID: 345384676}
+  - {fileID: 206919568}
+  - {fileID: 219706165}
+  - {fileID: 867981188}
+  unitAmount: 0
 --- !u!1 &1133096857
 GameObject:
   m_ObjectHideFlags: 0
@@ -1634,7 +1648,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5cb41f415424f341afb4fd0eac5a614, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeSpan: 60
+  timeSpan: 10
   timeLeft: 0
 --- !u!114 &1917953256
 MonoBehaviour:
