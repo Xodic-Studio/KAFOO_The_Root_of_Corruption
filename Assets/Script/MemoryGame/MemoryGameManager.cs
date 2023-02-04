@@ -31,6 +31,7 @@ public class MemoryGameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        MasterScript.Instance.isInGame = true;
         currentLevelNumber = MasterScript.Instance.minigamePlayCount[0];
         popUpImageIndex = currentLevelNumber - 1;
         canvas = GameObject.Find("Canvas");

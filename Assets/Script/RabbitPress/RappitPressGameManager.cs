@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 
 
-public class GameSystem : MonoBehaviour
+public class RappitPressGameManager : MonoBehaviour
 {
     public int level = 1;
     [SerializeField] private PressSystem p1PressSystem;
@@ -31,6 +31,7 @@ public class GameSystem : MonoBehaviour
 
     private void Start()
     {
+        MasterScript.Instance.isInGame = true;
         level = MasterScript.Instance.minigamePlayCount[2];
         popUpImageIndex = level - 1;
         popUpSystem = Instantiate(popUpPrefab, canvas.transform).GetComponent<PopUpSystem>();
