@@ -13,6 +13,7 @@ public class MemoryGameManager : MonoBehaviour
     public int popUpImageIndex = 0;
     private GameObject canvas;
     private bool popUped;
+   
     struct Level
     {
         public float timeSpan;
@@ -50,6 +51,11 @@ public class MemoryGameManager : MonoBehaviour
 
     // Update is called once per frame
     void Update()
+    {
+        CheckForPopUp();
+    }
+
+    void CheckForPopUp()
     {
         if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.RightControl)) && !popUped)
         {
