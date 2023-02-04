@@ -540,6 +540,7 @@ GameObject:
   m_Component:
   - component: {fileID: 415793535}
   - component: {fileID: 415793536}
+  - component: {fileID: 415793537}
   m_Layer: 0
   m_Name: GameSystem
   m_TagString: Untagged
@@ -582,7 +583,27 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c8e295ef9c0751c44a13ba8979079efd, type: 2}
   - {fileID: 11400000, guid: 20cc3daf8cd28584696f4d12b4cd44a3, type: 2}
   - {fileID: 11400000, guid: 6d7daf220e3d5a249b7d02f163697da1, type: 2}
+  timeSystem: {fileID: 1917953255}
+  finishScreenPrefab: {fileID: 111461065495219332, guid: 9b9efb97bf5f6fd42adcb21e4f487de4, type: 3}
+  finishShowed: 0
   dificultLevel: 1
+  popUpPrefab: {fileID: 6604063561081856403, guid: 8727c19f6bcbe804595113b76549d386, type: 3}
+  tutorialImageSO: {fileID: 11400000, guid: 7937307bd39468b49a1c8bd597fb5539, type: 2}
+  popUpImageIndex: 0
+--- !u!114 &415793537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 415793534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d89394df440db946b3588e31a9facd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pausePrefab: {fileID: 2310180254477964168, guid: 74a95c66cb6a26e45966b8e55eb503e1, type: 3}
+  timeSystem: {fileID: 1917953255}
 --- !u!1 &638825842
 GameObject:
   m_ObjectHideFlags: 0
@@ -1046,6 +1067,7 @@ MonoBehaviour:
   - {fileID: 206919568}
   - {fileID: 219706165}
   - {fileID: 867981188}
+  timeSystem: {fileID: 1917953255}
   unitAmount: 0
 --- !u!1 &1133096857
 GameObject:
@@ -1495,6 +1517,7 @@ MonoBehaviour:
   bulletOffset: 1
   fireRate: 0.1
   staminaBar: {fileID: 1429788148}
+  timeSystem: {fileID: 1917953255}
   staminaRegenRate: 0.5
   hp: 5
   maxStamina: 10
@@ -1650,6 +1673,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeSpan: 10
   timeLeft: 0
+  gameStart: 0
 --- !u!114 &1917953256
 MonoBehaviour:
   m_ObjectHideFlags: 0

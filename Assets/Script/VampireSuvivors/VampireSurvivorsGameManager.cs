@@ -10,12 +10,29 @@ public class VampireSurvivorsGameManager : MonoBehaviour
     [SerializeField] private GoodPlayer goodPlayer;
     [SerializeField] private TimeSystem time;
     [SerializeField] private List<GameSystemData> gameSystemData;
+    [SerializeField] private TimeSystem timeSystem;
+    [SerializeField] private GameObject finishScreenPrefab;
+    [SerializeField] private bool finishShowed;
     public int dificultLevel;
+    public GameObject popUpPrefab;
+    private PopUpSystem popUpSystem;
+    public TutorialImage tutorialImageSO;
+    private bool setUpSystem = false;
+    public int popUpImageIndex = 0;
+    private GameObject canvas;
+    private bool popUped;
 
 
 
     private void Start()
     {
+        dificultLevel = MasterScript.Instance.minigamePlayCount[1];
+        popUpImageIndex = dificultLevel - 1;
+        canvas = GameObject.Find("Canvas");
+        popUpSystem = Instantiate(popUpPrefab, canvas.transform).GetComponent<PopUpSystem>();
+        popUpSystem.imageIndex = popUpImageIndex;
+        popUpSystem.tutorialImageSO = tutorialImageSO;
+        popUpSystem.ShowPopUp();
         switch (dificultLevel)
         {
             case 1:
@@ -52,8 +69,22 @@ public class VampireSurvivorsGameManager : MonoBehaviour
     
     private void Update()
     {
-  
-        checkWin();
+        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.RightControl)) && !popUped)
+        {
+            popUped = true;
+            popUpSystem.ClosePopUp(timeSystem);
+            if (!setUpSystem)
+            {
+                goodPlayer.SetUp();
+                spawnEnemyZone.SetUp();
+                setUpSystem = true;
+            }
+        }
+
+        if (!finishShowed)
+        {
+            checkWin();
+        }
     }
 
     
@@ -62,17 +93,44 @@ public class VampireSurvivorsGameManager : MonoBehaviour
         // one win
         if (time.timeLeft <= 0 && goodPlayer.hp <= 0)
         {
-            Debug.Log("Win Win");
+            timeSystem.gameStart = false;
+            GameObject finishScreen = Instantiate(finishScreenPrefab, canvas.transform);
+            FinishScreen finishScreenSystem = finishScreen.GetComponent<FinishScreen>();
+            MasterScript.Instance.p1Score++;
+            MasterScript.Instance.p2Score++;
+            finishScreenSystem.ShowScreen();
+            finishShowed = true;
+            MasterScript.Instance.minigamePlayCount[1]++;
+            Invoke(nameof(ToSelectScene),5);
         }
         // bad player win
         else if (goodPlayer.hp <= 0)
         {
-            Debug.Log("Bad Win");
+            timeSystem.gameStart = false;
+            GameObject finishScreen = Instantiate(finishScreenPrefab, canvas.transform);
+            FinishScreen finishScreenSystem = finishScreen.GetComponent<FinishScreen>();
+            MasterScript.Instance.p1Score++;
+            finishScreenSystem.ShowScreen();
+            finishShowed = true;
+            MasterScript.Instance.minigamePlayCount[1]++;
+            Invoke(nameof(ToSelectScene),5);
         }
         // good player win
-        else if (time.GetComponent<TimeSystem>().timeLeft <= 0)
+        else if (time.timeLeft <= 0)
         {
-            Debug.Log("Good Win");
+            timeSystem.gameStart = false;
+            GameObject finishScreen = Instantiate(finishScreenPrefab, canvas.transform);
+            FinishScreen finishScreenSystem = finishScreen.GetComponent<FinishScreen>();
+            MasterScript.Instance.p2Score++;
+            finishScreenSystem.ShowScreen();
+            finishShowed = true;
+            MasterScript.Instance.minigamePlayCount[1]++;
+            Invoke(nameof(ToSelectScene),5);
         }
+    }
+    
+    void ToSelectScene()
+    {
+        LoadSceneManager.Instance.LoadScene(SceneName.Selection);
     }
 }

@@ -16,8 +16,8 @@ public class SpawnEnemyZone : MonoBehaviour
     [SerializeField] private float maxStamina;
     [SerializeField] private Scrollbar staminaBar;
     [SerializeField] private List<EnemyData> enemyDataList;
-
     [SerializeField] private List<Image> skillImages;
+    [SerializeField] private TimeSystem timeSystem;
     public int unitAmount;
     private int difficultLevel;
     private Color tempColor;
@@ -29,6 +29,11 @@ public class SpawnEnemyZone : MonoBehaviour
         staminaRegenRate = gameSystemData.badPlayerStaminaRegen;
     }
     void Start()
+    {
+        
+    }
+
+    public void SetUp()
     {
         InvokeRepeating(nameof(StaminaRegen) , 0, 0.1f);
         tempColor = skillImages[0].color;
@@ -48,8 +53,8 @@ public class SpawnEnemyZone : MonoBehaviour
     
     void Update()
     {
+        if (!timeSystem.gameStart) return;
         KeyDetect();
-
         StaminaBarUpdate();
     }
 
