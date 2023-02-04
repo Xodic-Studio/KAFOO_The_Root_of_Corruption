@@ -11,4 +11,5 @@ public class EnemyData : ScriptableObject
     public Sprite sprite;
     public int hp;
     public int cost;
+    public Color color;
 }

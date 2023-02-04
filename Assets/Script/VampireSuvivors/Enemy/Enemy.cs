@@ -13,10 +13,13 @@ public class Enemy : MonoBehaviour
     public bool isCatching;
     public Heart target;
     public HeartZone heartZone;
+    public Sprite sprite;
+    public Color color;
 
     private int randomIndexHeart = 0;
     private GameObject capturedHeart;
     private Vector2 spawnPoint;
+    
 
 
     public void AssignEnemyData(EnemyData enemyData, Heart target, HeartZone heartZone)
@@ -26,11 +29,15 @@ public class Enemy : MonoBehaviour
         this.heartZone = heartZone;
         this.target = target;
         spawnPoint = transform.position;
+        sprite = enemyData.sprite;
+        color = enemyData.color;
     }
 
     void Start()
     {
         spawnPoint = transform.position;
+        //GetComponent<SpriteRenderer>().sprite = sprite;
+        //GetComponent<SpriteRenderer>().color = color;
     }
     
     void Update()
