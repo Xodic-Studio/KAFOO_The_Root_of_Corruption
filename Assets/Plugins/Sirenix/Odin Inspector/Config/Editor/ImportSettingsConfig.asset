@@ -9,12 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fcf773e89d0737469aa94d5e40ad34c, type: 3}
-  m_Name: Level1
+  m_Script: {fileID: 188390376, guid: a4865f1ab4504ed8a368670db22f409c, type: 3}
+  m_Name: ImportSettingsConfig
   m_EditorClassIdentifier: 
-  level: 1
-  speed: 1
-  sprite: {fileID: 21300000, guid: dae4e717081abb54487e5b1c879e1261, type: 3}
-  hp: 1
-  cost: 2
-  color: {r: 0, g: 0, b: 0, a: 1}
+  automateBeforeBuild: 1
