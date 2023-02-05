@@ -249,6 +249,9 @@ MonoBehaviour:
   - {fileID: 1461304614}
   - {fileID: 618819405}
   soundController: {fileID: 20241189}
+  transitions:
+  - {fileID: 1028799980}
+  - {fileID: 50815991}
   selectedButton: 0
   isSelecting: 0
   isVertical: 0
@@ -280,6 +283,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   soundData: {fileID: 11400000, guid: 0e93768cb3740be46a82833f2d927c63, type: 2}
+--- !u!95 &50815991 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8681156508659660635, guid: 892e5a8cddb9d2d4fb67035d9146b00e, type: 3}
+  m_PrefabInstance: {fileID: 8681156509573399620}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &88126118
 GameObject:
   m_ObjectHideFlags: 0
@@ -1039,6 +1047,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 803148358}
   m_CullTransparentMesh: 1
+--- !u!95 &1028799980 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8681156509968978781, guid: 892e5a8cddb9d2d4fb67035d9146b00e, type: 3}
+  m_PrefabInstance: {fileID: 8681156509573399620}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1058848244
 GameObject:
   m_ObjectHideFlags: 0

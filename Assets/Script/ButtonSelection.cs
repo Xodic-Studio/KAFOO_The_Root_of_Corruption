@@ -8,6 +8,7 @@ public class ButtonSelection : MonoBehaviour
 {
     [Required] [SceneObjectsOnly] public List<Button> buttons;
     [Required] [SerializeField] SoundController soundController;
+    [Required] [SerializeField] private Animator[] transitions;
     public int selectedButton;
     public bool isSelecting;
     public bool isVertical;
@@ -36,6 +37,10 @@ public class ButtonSelection : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.RightControl))
         {
             soundController.PlaySound("transitions");
+            foreach (var VARIABLE in transitions)
+            {
+                VARIABLE.SetTrigger("Exit");
+            }
             buttons[selectedButton].onClick.Invoke();
         }
     }
