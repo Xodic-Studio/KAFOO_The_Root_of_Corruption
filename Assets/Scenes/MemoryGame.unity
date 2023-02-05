@@ -894,6 +894,9 @@ MonoBehaviour:
   canvas: {fileID: 204591572}
   timeSystem: {fileID: 561266458}
   finishScreenPrefab: {fileID: 111461065495219332, guid: 9b9efb97bf5f6fd42adcb21e4f487de4, type: 3}
+  transitions:
+  - {fileID: 605880198}
+  - {fileID: 605880197}
 --- !u!4 &562037390
 Transform:
   m_ObjectHideFlags: 0
@@ -1044,6 +1047,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 892e5a8cddb9d2d4fb67035d9146b00e, type: 3}
+--- !u!95 &605880197 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8681156508659660635, guid: 892e5a8cddb9d2d4fb67035d9146b00e, type: 3}
+  m_PrefabInstance: {fileID: 605880196}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &605880198 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8681156509968978781, guid: 892e5a8cddb9d2d4fb67035d9146b00e, type: 3}
+  m_PrefabInstance: {fileID: 605880196}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &690549988
 GameObject:
   m_ObjectHideFlags: 0

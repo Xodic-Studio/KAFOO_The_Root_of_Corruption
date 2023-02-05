@@ -11,6 +11,7 @@ public class MemoryScoreSystem : MonoBehaviour
     [SerializeField] private Canvas canvas;
     public TimeSystem timeSystem;
     public GameObject finishScreenPrefab;
+    public Animator[] transitions;
 
     // Start is called before the first frame update
     void Start()
@@ -57,6 +58,10 @@ public class MemoryScoreSystem : MonoBehaviour
     
     void ToSelectScene()
     {
+        foreach (var VARIABLE in transitions)
+        {
+            VARIABLE.SetTrigger("Exit");
+        }
         LoadSceneManager.Instance.LoadScene(SceneName.Selection);
     }
 
