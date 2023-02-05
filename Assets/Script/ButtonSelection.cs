@@ -18,6 +18,7 @@ public class ButtonSelection : MonoBehaviour
 
     private void Update()
     {
+        if (MasterScript.Instance.isEnded) return;
         if (isVertical)
         {
             if (Input.GetAxis("Vertical") != 0 && !isSelecting) StartCoroutine(SelectButton());

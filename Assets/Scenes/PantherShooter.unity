@@ -1259,7 +1259,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentLevelNumber: 1
   popUpPrefab: {fileID: 6604063561081856403, guid: 8727c19f6bcbe804595113b76549d386, type: 3}
-  tutorialImageSO: {fileID: 11400000, guid: 99f6b2549f941bf48be2df631a1de2fc, type: 2}
+  tutorialImageSO: {fileID: 11400000, guid: 790812def0cb0bc4f96de4c197e8e4c7, type: 2}
   popUpImageIndex: 0
   timeSystem: {fileID: 704187921}
   pantherShooterGameSystem: {fileID: 1312337065}
