@@ -8,6 +8,7 @@ using UnityEngine.Serialization;
 
 public class RappitPressGameManager : MonoBehaviour
 {
+    public SoundData soundData;
     public int level = 1;
     [SerializeField] private PressSystem p1PressSystem;
     [SerializeField] private PressSystem p2PressSystem;
@@ -133,6 +134,7 @@ public class RappitPressGameManager : MonoBehaviour
         {
             VARIABLE.SetTrigger("Exit");
         }
+        SoundManager.Instance.StopMusic();
         LoadSceneManager.Instance.LoadScene(SceneName.Selection);
     }
 }
