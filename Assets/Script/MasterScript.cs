@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Video;
+
 public enum Player
 {
     Player1,
@@ -11,11 +13,13 @@ public enum Player
 public class MasterScript : Singleton<MasterScript>
 {
     public float timeLeft = 0f;
-    public float timeSpan = 300f;
+    public float timeSpan = 3f;
     public int p1Score = 0;
     public int p2Score = 0;
+    public int winCondition;
     public bool isGameStarted = false;
     public bool isInGame = false;
+    public bool isEnded = false;
     public List<int> minigamePlayCount = new List<int>() {1, 1, 1, 1};
 
     public void Start()
@@ -52,17 +56,30 @@ public class MasterScript : Singleton<MasterScript>
     {
         if (!(timeLeft <= 0)) return;
         if (isInGame) return;
+        if (isEnded) return;
         if (p1Score > p2Score)
         {
+            isEnded = true;
             Debug.Log("P1 Win");
+            winCondition = 0;
+            SoundManager.Instance.StopMusic();
+            LoadSceneManager.Instance.LoadScene(SceneName.EndScene);
         }
         else if (p1Score < p2Score)
         {
+            isEnded = true;
             Debug.Log("P2 Win");
+            winCondition = 1;
+            SoundManager.Instance.StopMusic();
+            LoadSceneManager.Instance.LoadScene(SceneName.EndScene);
         }
         else if (p1Score == p2Score)
         {
+            isEnded = true;
             Debug.Log("Draw!!!");
+            winCondition = 2;
+            SoundManager.Instance.StopMusic();
+            LoadSceneManager.Instance.LoadScene(SceneName.EndScene);
         }
 
         if (isGameStarted) isGameStarted = false;
