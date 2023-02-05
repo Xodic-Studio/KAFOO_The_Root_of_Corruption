@@ -12,4 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b38f89befb605b4287a7aebc92d5d21, type: 3}
   m_Name: PantherShoot
   m_EditorClassIdentifier: 
-  tutorialImages: []
+  tutorialImages:
+  - {fileID: 21300000, guid: 591a0c441bcda1f48b7550f3d31aae73, type: 3}
+  - {fileID: 21300000, guid: 591a0c441bcda1f48b7550f3d31aae73, type: 3}
+  - {fileID: 21300000, guid: 591a0c441bcda1f48b7550f3d31aae73, type: 3}
+  - {fileID: 21300000, guid: 591a0c441bcda1f48b7550f3d31aae73, type: 3}

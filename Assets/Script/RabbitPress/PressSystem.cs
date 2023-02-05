@@ -10,6 +10,7 @@ using Random = UnityEngine.Random;
 
 public class PressSystem : MonoBehaviour
 {
+    public SoundData soundData;
     [SerializeField] private Camera cam;
     [SerializeField] private float changeKeyRate;
     [SerializeField] private int keyLimit;
@@ -40,6 +41,7 @@ public class PressSystem : MonoBehaviour
         otherKey = keys.ToList();
         otherKey.Remove(key);
         _transformAfterChange = transform;
+        SoundManager.Instance.PlayMusic(soundData.GetMusicClip("button_pressing"));
     }
 
     public void SetKeyLimit(int limit)
@@ -59,6 +61,7 @@ public class PressSystem : MonoBehaviour
                 pressAble = false;
                 Invoke(nameof(TurnOnPress), 1.5f);
                 Debug.Log("Wrong Key");
+                SoundManager.Instance.PlaySound(soundData.GetSoundClip("wrong_key"));
                 GetComponent<Image>().color = Color.red;
                 audioSource.clip = pressWrongKey;
                 audioSource.Play();
@@ -83,6 +86,7 @@ public class PressSystem : MonoBehaviour
             }
             PlayOneEffect();
             pressCount++;
+            SoundManager.Instance.PlaySound(soundData.GetSoundClip("foo_correct"));
             comboParticlePlayed = false;
         }
 
