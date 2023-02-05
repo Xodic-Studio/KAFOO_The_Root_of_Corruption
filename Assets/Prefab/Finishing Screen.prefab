@@ -331,6 +331,7 @@ MonoBehaviour:
   backdropEndColor: {r: 0, g: 0, b: 0, a: 0.74509805}
   backgroundBeginPosition: {x: 0, y: -1000, z: 0}
   backgroundEndPosition: {x: 0, y: 0, z: 0}
+  soundData: {fileID: 11400000, guid: b76458362a3aae94f86d1846af422d1d, type: 2}
 --- !u!1 &111461065539330706
 GameObject:
   m_ObjectHideFlags: 0
