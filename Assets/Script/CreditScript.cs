@@ -19,8 +19,7 @@ public class CreditScript : MonoBehaviour
         if (Input.GetKeyDown(skipKeys[0]) || Input.GetKeyDown(skipKeys[1]))
         {
             animator.SetBool("isSkip", true);
-            LoadSceneManager sceneManager = new LoadSceneManager();
-            sceneManager.LoadScene(SceneName.Menu);
+            LoadSceneManager.Instance.LoadScene(SceneName.Menu);
         }
         
         /* Auto Skip When End
