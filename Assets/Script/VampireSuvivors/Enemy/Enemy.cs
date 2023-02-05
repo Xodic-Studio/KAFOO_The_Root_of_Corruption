@@ -41,8 +41,8 @@ public class Enemy : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         SoundManager.Instance.PlaySound(data.GetSoundClip("EnemySpawn"));
         spawnPoint = transform.position;
-        //GetComponent<SpriteRenderer>().sprite = sprite;
-        //GetComponent<SpriteRenderer>().color = color;
+        GetComponent<SpriteRenderer>().sprite = sprite;
+        GetComponent<SpriteRenderer>().color = color;
     }
     
     void Update()

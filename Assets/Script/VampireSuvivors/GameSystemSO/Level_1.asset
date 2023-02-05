@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77a92b05b86502443a02a7e1487b3495, type: 3}
   m_Name: Level_1
   m_EditorClassIdentifier: 
-  level: 4
+  level: 1
   unitAmount: 2
   badPlayerStaminaRegen: 0.13
   goodPlayerHp: 5
