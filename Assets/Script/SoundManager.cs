@@ -10,6 +10,7 @@ public class SoundManager : Singleton<SoundManager>
     private void Awake()
     {
         audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.loop = true;
     }
 
     public void PlaySound(AudioClip audioClip)

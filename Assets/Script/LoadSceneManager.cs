@@ -10,7 +10,8 @@ public enum SceneName
     VampireSurvival,
     MemoryGame,
     PantherShooter,
-    EndScene,
+    EndSceneGood,
+    EndSceneBad,
     Credit,
     Quit,
 }

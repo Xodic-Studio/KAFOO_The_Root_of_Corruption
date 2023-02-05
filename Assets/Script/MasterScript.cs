@@ -65,7 +65,7 @@ public class MasterScript : Singleton<MasterScript>
             Debug.Log("P1 Win");
             winCondition = 0;
             SoundManager.Instance.StopMusic();
-            LoadSceneManager.Instance.LoadScene(SceneName.EndScene);
+            LoadSceneManager.Instance.LoadScene(SceneName.EndSceneBad);
         }
         else if (p1Score < p2Score)
         {
@@ -73,7 +73,7 @@ public class MasterScript : Singleton<MasterScript>
             Debug.Log("P2 Win");
             winCondition = 1;
             SoundManager.Instance.StopMusic();
-            LoadSceneManager.Instance.LoadScene(SceneName.EndScene);
+            LoadSceneManager.Instance.LoadScene(SceneName.EndSceneGood);
         }
         else if (p1Score == p2Score)
         {
@@ -81,7 +81,7 @@ public class MasterScript : Singleton<MasterScript>
             Debug.Log("Draw!!!");
             winCondition = 2;
             SoundManager.Instance.StopMusic();
-            LoadSceneManager.Instance.LoadScene(SceneName.EndScene);
+            LoadSceneManager.Instance.LoadScene(SceneName.EndSceneBad);
         }
 
         if (isGameStarted) isGameStarted = false;

@@ -1,16 +1,19 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class CreditScript : MonoBehaviour
 {
     [SerializeField] private List<KeyCode> skipKeys;
     private Animator animator;
+    [Required] [SerializeField] private SoundData soundData;
 
 
     private void Start()
     {
+        SoundManager.Instance.PlayMusic(soundData.GetMusicClip("Credit"));
         animator = GetComponent<Animator>();
     }
 
