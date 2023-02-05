@@ -11602,8 +11602,12 @@ MonoBehaviour:
   - 5
   comboParticlePlayed: 0
   particle: {fileID: 806965281}
-  audioSource: {fileID: 0}
+  audioSource: {fileID: 1510431225}
   pressCount: 0
+  pressAudio:
+  - {fileID: 8300000, guid: a2d37c4e669ca83449f8c9c8f1da240d, type: 3}
+  - {fileID: 8300000, guid: 5f875798947eff646aadd1cf19802149, type: 3}
+  pressWrongKey: {fileID: 8300000, guid: c345f46d1a37de941afa05ee2f651e47, type: 3}
   timeSystem: {fileID: 698833638}
   otherKey: 
   pressAble: 1
@@ -16734,8 +16738,12 @@ MonoBehaviour:
   - 500
   comboParticlePlayed: 0
   particle: {fileID: 1900302936}
-  audioSource: {fileID: 0}
+  audioSource: {fileID: 1510431225}
   pressCount: 0
+  pressAudio:
+  - {fileID: 8300000, guid: 5f875798947eff646aadd1cf19802149, type: 3}
+  - {fileID: 8300000, guid: a2d37c4e669ca83449f8c9c8f1da240d, type: 3}
+  pressWrongKey: {fileID: 8300000, guid: c345f46d1a37de941afa05ee2f651e47, type: 3}
   timeSystem: {fileID: 698833638}
   otherKey: 
   pressAble: 1

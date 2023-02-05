@@ -30,7 +30,7 @@ public class SpawnEnemyZone : MonoBehaviour
     }
     void Start()
     {
-        
+
     }
 
     public void SetUp()

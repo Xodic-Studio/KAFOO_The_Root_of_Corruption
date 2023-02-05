@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6ad654d4ad5bcc42b4075f0f31514c2, type: 3}
+  m_Name: VPS
+  m_EditorClassIdentifier: 
+  musicClips: []
+  soundClips:
+  - {fileID: 8300000, guid: 92328fa22f45c154683f5d99657a1035, type: 3}
+  - {fileID: 8300000, guid: 92328fa22f45c154683f5d99657a1035, type: 3}
+  - {fileID: 8300000, guid: 70cf7871cc8c20441a78a75e5faf7c8d, type: 3}
+  - {fileID: 8300000, guid: 42860020e3836224890c3c63f7d89d44, type: 3}
+  - {fileID: 8300000, guid: 5587ee61359292a4aa591c09c32a5e8f, type: 3}
+  - {fileID: 8300000, guid: 7b34376a3a43ead4babedc2b8cf3efe9, type: 3}
+  - {fileID: 8300000, guid: 91f848d7e5bc3c944b1ef5585be0d2d0, type: 3}
+  - {fileID: 8300000, guid: 4f6bc84ff11ec61449c52e502604f346, type: 3}
+  - {fileID: 8300000, guid: 1934fcd290026654fa169c918651ba23, type: 3}

@@ -11,6 +11,8 @@ public class GoodPlayer : MonoBehaviour
     [SerializeField] private float fireRate;
     [SerializeField] private Scrollbar staminaBar;
     [SerializeField] private TimeSystem timeSystem;
+    private AudioSource audioSource;
+    [SerializeField] private AudioClip shoot;
  
     private Vector3 bulletPosition;
     private float nextFire;
@@ -29,7 +31,7 @@ public class GoodPlayer : MonoBehaviour
     }
     void Start()
     {
-        
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void SetUp()
@@ -62,6 +64,8 @@ public class GoodPlayer : MonoBehaviour
 
         if ((Input.GetAxisRaw("Fire1") != 0) && (Time.time > nextFire) && stamina > 0)
         {
+            audioSource.clip = shoot;
+            audioSource.Play();
             Instantiate(bullet, transform.position + bulletPosition, transform.rotation);
             nextFire = Time.time + fireRate;
             stamina--;
