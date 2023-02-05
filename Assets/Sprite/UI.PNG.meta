@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 896790172e2f76b4c98eb16221626c1b
+guid: e378e2d604f69af48a21af13e28334c7
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -68,7 +68,7 @@ TextureImporter:
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: -1
+    textureFormat: 4
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
@@ -104,22 +104,22 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: WhiteRabbit_0
+      name: UI_0
       rect:
         serializedVersion: 2
-        x: 1082
-        y: 182
-        width: 135
-        height: 135
+        x: 706
+        y: 428
+        width: 447
+        height: 174
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 38, y: 47, z: 43, w: 44}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f95dcdca51a4e094aa54a17e5a8c4b95
-      internalID: -816284495
+      spriteID: c28a3502417219847b4de0aec4a61003
+      internalID: 272476031
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      WhiteRabbit_0: -816284495
+      UI_0: 272476031
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

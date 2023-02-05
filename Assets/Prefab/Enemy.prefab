@@ -73,9 +73,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -1771184877
+  m_SortingLayer: 2
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.990566, g: 0, b: 0, a: 1}
   m_FlipX: 0
@@ -125,13 +125,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e57fbf481f8ea34391a66d5d1eb28e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 1
   speed: 2
-  catchingOffset: {x: 3, y: 3}
   hp: 0
-  cost: 0
   isCatching: 0
-  playerHeartZone: {fileID: 0}
+  target: {fileID: 0}
+  heartZone: {fileID: 0}
+  sprite: {fileID: 0}
+  color: {r: 0, g: 0, b: 0, a: 0}
 --- !u!50 &210339699103885889
 Rigidbody2D:
   serializedVersion: 4
