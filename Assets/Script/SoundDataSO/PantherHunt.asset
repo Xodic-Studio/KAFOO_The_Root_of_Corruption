@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6ad654d4ad5bcc42b4075f0f31514c2, type: 3}
+  m_Name: PantherHunt
+  m_EditorClassIdentifier: 
+  musicClips:
+  - {fileID: 8300000, guid: 7778af6dca439824aaa697d4b52a1916, type: 3}
+  soundClips:
+  - {fileID: 8300000, guid: a9a9c263493e37447a2e7e8d569ed459, type: 3}
+  - {fileID: 8300000, guid: f9c405cd22bd07941b075e114a646acb, type: 3}
+  - {fileID: 8300000, guid: a7177422fbcbcf847838a69c4fa7c700, type: 3}
+  - {fileID: 8300000, guid: e6bd534b60c07f14ea5514f04de42868, type: 3}

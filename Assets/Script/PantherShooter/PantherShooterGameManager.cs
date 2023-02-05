@@ -26,9 +26,9 @@ public class PantherShooterGameManager : MonoBehaviour
     public PantherShooterGameSystem pantherShooterGameSystem;
 
     private static Level level1 = new Level() { crosshairScale = new Vector3(0.5f, 0.5f, 0.5f), sensitivity = 10, timeSpan = 30, pantherSkillTime = 1, pantherSkillCooldown = 3, glueMode = false };
-    private static Level level2 = new Level() { crosshairScale = new Vector3(1, 1, 1), sensitivity = 15, timeSpan = 45, pantherSkillTime = 1, pantherSkillCooldown = 3,  glueMode = false };
-    private static Level level3 = new Level() { crosshairScale = new Vector3(1, 1, 1), sensitivity = 15, timeSpan = 45, pantherSkillTime = 5, pantherSkillCooldown = 10,  glueMode = false };
-    private static Level level4 = new Level() { crosshairScale = new Vector3(1, 1, 1), sensitivity = 20, timeSpan = 60, pantherSkillTime = 5, pantherSkillCooldown = 10,  glueMode = true };
+    private static Level level2 = new Level() { crosshairScale = new Vector3(0.7f, 0.7f, 0.7f), sensitivity = 15, timeSpan = 45, pantherSkillTime = 1, pantherSkillCooldown = 3,  glueMode = false };
+    private static Level level3 = new Level() { crosshairScale = new Vector3(0.7f, 0.7f, 0.7f), sensitivity = 15, timeSpan = 45, pantherSkillTime = 5, pantherSkillCooldown = 10,  glueMode = false };
+    private static Level level4 = new Level() { crosshairScale = new Vector3(0.7f, 0.7f, 0.7f), sensitivity = 20, timeSpan = 60, pantherSkillTime = 5, pantherSkillCooldown = 10,  glueMode = true };
     private Level[] allLevels = new Level[] { level1, level2, level3, level4 };
     // Start is called before the first frame update
     void Start()
