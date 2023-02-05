@@ -10,14 +10,19 @@ public enum SceneName
     VampireSurvival,
     MemoryGame,
     PantherShooter,
+    EndScene,
     Credit,
     Quit,
 }
 
 public class LoadSceneManager : Singleton<LoadSceneManager>
 {
+    public bool loadingScene = false;
+    public bool finishedLoading = true;
+    private int nextSceneNumber = 0;
     public void LoadScene(SceneName sceneName)
     {
+        finishedLoading = false;
         if (sceneName == SceneName.Quit)
         {
             Debug.Log("Quit");
@@ -25,8 +30,25 @@ public class LoadSceneManager : Singleton<LoadSceneManager>
         }
         else
         {
-            SceneManager.LoadScene((int)sceneName);
+            nextSceneNumber = (int)sceneName;
+            
+            Invoke(nameof(WaifBeforeLoad), 2f);
         }
+    }
+
+    public void WaifBeforeLoad()
+    {
+        SceneManager.LoadScene((nextSceneNumber));
+
+        AsyncOperation async = SceneManager.LoadSceneAsync((nextSceneNumber));
+        async.allowSceneActivation = false;
+        loadingScene = true;
+        if (async.isDone)
+        {
+            finishedLoading = true;
+            async.allowSceneActivation = true;
+        }
+        
     }
 
     public void Quit()
