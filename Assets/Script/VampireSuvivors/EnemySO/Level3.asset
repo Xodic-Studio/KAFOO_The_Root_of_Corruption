@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: 3
   speed: 2
-  sprite: {fileID: 0}
+  sprite: {fileID: 923180622, guid: 9e9ad35df7d9d1a4b81d444b6519387f, type: 3}
   hp: 4
   cost: 5
+  color: {r: 1, g: 1, b: 1, a: 1}

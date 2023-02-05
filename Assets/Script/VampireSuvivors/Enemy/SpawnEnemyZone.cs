@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -17,6 +18,8 @@ public class SpawnEnemyZone : MonoBehaviour
     [SerializeField] private Scrollbar staminaBar;
     [SerializeField] private List<EnemyData> enemyDataList;
     [SerializeField] private List<Image> skillImages;
+    [SerializeField] private List<TextMeshProUGUI> textCost;
+    [SerializeField] private List<Image> images;
     [SerializeField] private TimeSystem timeSystem;
     public int unitAmount;
     private int difficultLevel;
@@ -44,9 +47,15 @@ public class SpawnEnemyZone : MonoBehaviour
             case 1:
                 skillImages[3].color = tempColor;
                 skillImages[2].color = tempColor;
+                textCost[3].color = tempColor;
+                textCost[2].color = tempColor;
+                images[3].color = tempColor;
+                images[2].color = tempColor;
                 break;
             case 2:
                 skillImages[3].color = tempColor;
+                textCost[3].color = tempColor;
+                images[3].color = tempColor;
                 break;
         }
     }
