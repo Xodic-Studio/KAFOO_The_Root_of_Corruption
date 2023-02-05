@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LoadSceneTransition : MonoBehaviour
 {
-    private bool playedAnimation = false;
+    private bool exited = false;
     public Animator[] LeftRightAnimator;
     // Start is called before the first frame update
     void Start()
@@ -16,22 +16,20 @@ public class LoadSceneTransition : MonoBehaviour
     void Update()
     {
         if (!LoadSceneManager.Instance.loadingScene) return;
-        if (!playedAnimation)
+        if (!exited)
         {
             gameObject.SetActive(true);
             foreach (Animator animator in LeftRightAnimator)
             {
                 StartCoroutine(PlayTransition(animator));
             }
-            playedAnimation = true;
+            exited = true;
         }
 
     }
 
     IEnumerator PlayTransition(Animator animator)
     {
-        Debug.Log("LOADDD AHHHH");
-        animator.SetTrigger("Enter");
         yield return new WaitForSeconds(2f);
         animator.SetTrigger("Exit");
     }

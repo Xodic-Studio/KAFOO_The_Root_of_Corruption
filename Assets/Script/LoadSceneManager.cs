@@ -22,7 +22,6 @@ public class LoadSceneManager : Singleton<LoadSceneManager>
     private int nextSceneNumber = 0;
     public void LoadScene(SceneName sceneName)
     {
-        loadingScene = true;
         finishedLoading = false;
         if (sceneName == SceneName.Quit)
         {
@@ -32,6 +31,7 @@ public class LoadSceneManager : Singleton<LoadSceneManager>
         else
         {
             nextSceneNumber = (int)sceneName;
+            
             Invoke(nameof(WaifBeforeLoad), 2f);
         }
     }
@@ -39,6 +39,16 @@ public class LoadSceneManager : Singleton<LoadSceneManager>
     public void WaifBeforeLoad()
     {
         SceneManager.LoadScene((nextSceneNumber));
+
+        AsyncOperation async = SceneManager.LoadSceneAsync((nextSceneNumber));
+        async.allowSceneActivation = false;
+        loadingScene = true;
+        if (async.isDone)
+        {
+            finishedLoading = true;
+            async.allowSceneActivation = true;
+        }
+        
     }
 
     public void Quit()

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -39,6 +40,8 @@ public class PantherShooterGameSystem : MonoBehaviour
     public float hunterStunDuration = 5f;
     public float pantherSensitivity, hunterSensitivity;
     private static readonly int Flash = Animator.StringToHash("Flash");
+    [Required]
+    public Animator[] transitions;
 
     // Start is called before the first frame update
     void Start()
@@ -128,6 +131,10 @@ public class PantherShooterGameSystem : MonoBehaviour
     
     void ToSelectScene()
     {
+        foreach (var VARIABLE in transitions)
+        {
+            VARIABLE.SetTrigger("Exit");
+        }
         LoadSceneManager.Instance.LoadScene(SceneName.Selection);
     }
     

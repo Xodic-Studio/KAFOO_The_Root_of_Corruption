@@ -1167,6 +1167,11 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 470}
   m_SizeDelta: {x: 400, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!95 &844787446 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8681156508659660635, guid: 892e5a8cddb9d2d4fb67035d9146b00e, type: 3}
+  m_PrefabInstance: {fileID: 469645346}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &920666032
 GameObject:
   m_ObjectHideFlags: 0
@@ -1327,6 +1332,9 @@ MonoBehaviour:
   hunterStunDuration: 5
   pantherSensitivity: 10
   hunterSensitivity: 10
+  transitions:
+  - {fileID: 1809695399}
+  - {fileID: 844787446}
 --- !u!4 &1312337066
 Transform:
   m_ObjectHideFlags: 0
@@ -1888,6 +1896,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1789724379}
   m_CullTransparentMesh: 1
+--- !u!95 &1809695399 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8681156509968978781, guid: 892e5a8cddb9d2d4fb67035d9146b00e, type: 3}
+  m_PrefabInstance: {fileID: 469645346}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1852638338
 GameObject:
   m_ObjectHideFlags: 0
