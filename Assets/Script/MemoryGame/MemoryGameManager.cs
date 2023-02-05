@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class MemoryGameManager : MonoBehaviour
@@ -28,9 +29,12 @@ public class MemoryGameManager : MonoBehaviour
     private static Level level3 = new Level() { timeSpan = 60, minRange = 2, maxRange = 5, swap = true };
     private static Level level4 = new Level() { timeSpan = 90, minRange = 2, maxRange = 999, swap = true };
     private Level[] allLevels = new Level[] { level1, level2, level3, level4 };
+    [Required]
+    public SoundData soundData;
     // Start is called before the first frame update
     void Start()
     {
+        SoundManager.Instance.PlayMusic(soundData.GetMusicClip("bgm"));
         MasterScript.Instance.isInGame = true;
         currentLevelNumber = MasterScript.Instance.minigamePlayCount[0];
         popUpImageIndex = currentLevelNumber - 1;

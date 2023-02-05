@@ -34,6 +34,8 @@ public class MemoryGameSystem : MonoBehaviour
     public Animator fhanafhonAnimator;
     private static readonly int Correct = Animator.StringToHash("Correct");
     private static readonly int Initial = Animator.StringToHash("Initial");
+    [Required]
+    public SoundData soundData;
 
     // Start is called before the first frame update
     void Start()
@@ -166,6 +168,7 @@ public class MemoryGameSystem : MonoBehaviour
         foreach (int i in sequence)
         {
             ButtonFeedback(i);
+            SoundManager.Instance.PlaySound(soundData.GetSoundClip("Guide"));
             yield return new WaitForSeconds(sequenceInterval);
         }
         if (swapAfterSequence)
@@ -217,10 +220,12 @@ public class MemoryGameSystem : MonoBehaviour
     }
     void InputCheck(int buttonIndex, List<int> sequence)
     {
+        SoundManager.Instance.PlaySound(soundData.GetSoundClip("Click"));
         if (CompareSequence(sequence, userSequence) == 0)
         {
             allowInput = false;
             Debug.Log("wrong!!");
+            SoundManager.Instance.PlaySound(soundData.GetSoundClip("Fail"));
             if (playerNum == 1)
                 fooAnimator.SetTrigger("Fail");
             else
@@ -242,6 +247,7 @@ public class MemoryGameSystem : MonoBehaviour
         {
             allowInput = false;
             Debug.Log("All correct");
+            SoundManager.Instance.PlaySound(soundData.GetSoundClip("Succes2"));
             memoryScoreSystem.IncreaseScore(playerNum, 1);
             userSequence.Clear();
             ButtonFeedback(buttonIndex, "Correct", true);

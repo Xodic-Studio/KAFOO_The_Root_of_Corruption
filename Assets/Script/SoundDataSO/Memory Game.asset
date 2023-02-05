@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6ad654d4ad5bcc42b4075f0f31514c2, type: 3}
+  m_Name: Memory Game
+  m_EditorClassIdentifier: 
+  musicClips:
+  - {fileID: 8300000, guid: acc5e0c03faa7b346ab10db5978cb85a, type: 3}
+  soundClips:
+  - {fileID: 8300000, guid: c8e5540c61b37284daf4fb29b62ca2cc, type: 3}
+  - {fileID: 8300000, guid: 07c8357d6cc1f414aab29e31780b177f, type: 3}
+  - {fileID: 8300000, guid: a846f2304cc63b34b833fe038838667b, type: 3}
+  - {fileID: 8300000, guid: cf0433e19fed2a44cbe4b6d54a181f83, type: 3}
+  - {fileID: 8300000, guid: b1fbe990119e7b941bf6fefcb17f278b, type: 3}
+  - {fileID: 8300000, guid: cb01c6d3047c3db4db8bdd3619bb31a0, type: 3}
