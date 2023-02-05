@@ -5,7 +5,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private float bulletSpeed = 5f;
-    [SerializeField] private int bulletDmg = 1;
+    public int bulletDmg = 1;
     private Rigidbody2D rb;
     void Start()
     {
@@ -26,14 +26,5 @@ public class Bullet : MonoBehaviour
         yield return new WaitForSeconds(waitTime);
         Destroy(gameObject);
     }
-
-    private void OnTriggerEnter2D(Collider2D enemy)
-    {
-        if (enemy.gameObject.tag.Equals("Enemy"))
-        {
-            Destroy(gameObject);
-            enemy.GetComponent<Enemy>().hp -= bulletDmg;
-        }
-        Debug.Log("Enter");
-    }
+    
 }

@@ -7,7 +7,9 @@ using UnityEngine.Serialization;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private float speed;
-
+    public AudioSource audioSource;
+     private int level;
+     [SerializeField] private SoundData data;
 
     public int hp;
     public bool isCatching;
@@ -31,10 +33,13 @@ public class Enemy : MonoBehaviour
         spawnPoint = transform.position;
         sprite = enemyData.sprite;
         color = enemyData.color;
+        level = enemyData.level;
     }
 
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
+        SoundManager.Instance.PlaySound(data.GetSoundClip("EnemySpawn"));
         spawnPoint = transform.position;
         //GetComponent<SpriteRenderer>().sprite = sprite;
         //GetComponent<SpriteRenderer>().color = color;
@@ -42,7 +47,7 @@ public class Enemy : MonoBehaviour
     
     void Update()
     {
-        if(IsEnemyDie()) return;
+        if(IsEnemyDie()) return ;
         if (isCatching == false)
         {
             EnemyMoveToPlayerHeart();
@@ -53,7 +58,7 @@ public class Enemy : MonoBehaviour
         }
         
     }
-
+    
     private void EnemyMoveToPlayerHeart()
     {
         if (target == null)
@@ -99,15 +104,52 @@ public class Enemy : MonoBehaviour
     private bool IsEnemyDie()
     {
         if (hp > 0) return false;
+        switch (level)
+        {
+            case 1: 
+                SoundManager.Instance.PlaySound(data.GetSoundClip("Enemy_1_Die"));
+                break;
+            case 2:
+                SoundManager.Instance.PlaySound(data.GetSoundClip("Enemy_2_Die"));
+                break;
+            case > 3:
+                SoundManager.Instance.PlaySound(data.GetSoundClip("Enemy_3_4_Die"));
+                break;
+        }
         Destroy(gameObject);
         return true;
     }
-
+    
     private void OnTriggerEnter2D(Collider2D col)
     {
+        if (col.gameObject.tag.Equals("Bullet"))
+        {
+            switch (level)
+            {
+                case 1: 
+                    SoundManager.Instance.PlaySound(data.GetSoundClip("Enemy_1_2_Hurt"));
+                    break;
+                case 2:
+                    SoundManager.Instance.PlaySound(data.GetSoundClip("Enemy_1_2_Hurt"));
+                    break;
+                case 3:
+                    SoundManager.Instance.PlaySound(data.GetSoundClip("Enemy_3_4_Hurt"));
+                    break;
+                case 4:
+                    SoundManager.Instance.PlaySound(data.GetSoundClip("Enemy_3_4_Hurt"));
+                    break;
+            }
+
+            hp -= col.GetComponent<Bullet>().bulletDmg;
+            Destroy(col.gameObject);
+        }
+        
         if(!col.gameObject.TryGetComponent<Heart>(out var touchObject)) return;
+        
         if (touchObject.id == target.id)
         {
+            SoundManager.Instance.PlaySound(data.GetSoundClip("EnemyDragPlayer"));
+
             target.isCatched = true;
             col.enabled = false;
             GetComponent<Collider2D>().enabled = false;
@@ -115,7 +157,7 @@ public class Enemy : MonoBehaviour
             capturedHeart = col.gameObject;
         }
     }
-
+    
     private void DestroyObject()
     {
         Destroy(gameObject);

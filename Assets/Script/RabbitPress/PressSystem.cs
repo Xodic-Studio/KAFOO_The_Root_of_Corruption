@@ -24,7 +24,10 @@ public class PressSystem : MonoBehaviour
     [SerializeField] private ParticleSystem particle;
     [SerializeField] private AudioSource audioSource;
     [HideInInspector] public int pressCount;
+    [SerializeField] private  List<AudioClip> pressAudio;
+    [SerializeField] private AudioClip pressWrongKey;
     public TimeSystem timeSystem;
+    private Transform _transformAfterChange;
     
     private KeyCode keyBefore;
     [SerializeField] private List<KeyCode> otherKey;
@@ -35,6 +38,7 @@ public class PressSystem : MonoBehaviour
         cam = Camera.main;
         otherKey = keys.ToList();
         otherKey.Remove(key);
+        _transformAfterChange = transform;
     }
 
     public void SetKeyLimit(int limit)
@@ -55,12 +59,19 @@ public class PressSystem : MonoBehaviour
                 Invoke(nameof(TurnOnPress), 1.5f);
                 Debug.Log("Wrong Key");
                 GetComponent<Image>().color = Color.red;
+                audioSource.clip = pressWrongKey;
+                audioSource.Play();
+                transform.localScale = Vector3.one;
                 return;
             }
         }
         if (Input.GetKeyDown(key))
         {
             GetComponent<Image>().color = Color.gray;
+            audioSource.clip = pressAudio[Random.Range(0, pressAudio.Count)];
+            audioSource.Play();
+            
+            transform.localScale = new Vector3(transform.localScale.x * 1.5f ,transform.localScale.y * 1.5f, transform.localScale.z);
             
             // change key & key sprite
             if (Random.Range(0, 100) < changeKeyRate)
@@ -82,6 +93,7 @@ public class PressSystem : MonoBehaviour
         if (Input.GetKeyUp(key) || Input.GetKeyUp(keyBefore))
         {
             GetComponent<Image>().color = Color.white;
+            transform.localScale = Vector3.one;
         }
         PlayComboEffect();
     }
