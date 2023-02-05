@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Sirenix.OdinInspector;
 using Unity.VisualScripting;
 using UnityEngine.UI;
 using UnityEngine;
@@ -27,8 +28,14 @@ public class MemoryGameSystem : MonoBehaviour
     private List<KeyCode> playerControl = new List<KeyCode>();
     private List<int> userSequence = new List<int>();
     [SerializeField] private bool allowInput = false;
+    [Required]
+    public Animator fooAnimator;
+    [Required]
+    public Animator fhanafhonAnimator;
     private static readonly int Correct = Animator.StringToHash("Correct");
     private static readonly int Initial = Animator.StringToHash("Initial");
+    [Required]
+    public SoundData soundData;
 
     // Start is called before the first frame update
     void Start()
@@ -71,21 +78,37 @@ public class MemoryGameSystem : MonoBehaviour
             Debug.Log("Input NOW!!!");
             if (Input.GetKeyDown(playerControl[0]))
             {
+                if(playerNum == 1)
+                    fooAnimator.SetTrigger("Up");
+                else
+                    fhanafhonAnimator.SetTrigger("Up");
                 userSequence.Add(0);
                 InputCheck(0, sequenceIndices);
             }
             else if (Input.GetKeyDown(playerControl[1]))
             {
+                if(playerNum == 1)
+                    fooAnimator.SetTrigger("Left");
+                else
+                    fhanafhonAnimator.SetTrigger("Left");
                 userSequence.Add(1);
                 InputCheck(1, sequenceIndices);
             }
             else if (Input.GetKeyDown(playerControl[2]))
             {
+                if (playerNum == 1)
+                    fooAnimator.SetTrigger("Down");
+                else
+                    fhanafhonAnimator.SetTrigger("Down");
                 userSequence.Add(2);
                 InputCheck(2, sequenceIndices);
             }
             else if (Input.GetKeyDown(playerControl[3]))
             {
+                if (playerNum == 1)
+                    fooAnimator.SetTrigger("Right");
+                else
+                    fhanafhonAnimator.SetTrigger("Right");
                 userSequence.Add(3);
                 InputCheck(3, sequenceIndices);
             }
@@ -145,6 +168,7 @@ public class MemoryGameSystem : MonoBehaviour
         foreach (int i in sequence)
         {
             ButtonFeedback(i);
+            SoundManager.Instance.PlaySound(soundData.GetSoundClip("Guide"));
             yield return new WaitForSeconds(sequenceInterval);
         }
         if (swapAfterSequence)
@@ -196,10 +220,16 @@ public class MemoryGameSystem : MonoBehaviour
     }
     void InputCheck(int buttonIndex, List<int> sequence)
     {
+        SoundManager.Instance.PlaySound(soundData.GetSoundClip("Click"));
         if (CompareSequence(sequence, userSequence) == 0)
         {
             allowInput = false;
             Debug.Log("wrong!!");
+            SoundManager.Instance.PlaySound(soundData.GetSoundClip("Fail"));
+            if (playerNum == 1)
+                fooAnimator.SetTrigger("Fail");
+            else
+                fhanafhonAnimator.SetTrigger("Fail");
             userSequence.Clear();
             ButtonFeedback(buttonIndex, "Wrong", true);
             if (swapAfterSequence)
@@ -217,6 +247,7 @@ public class MemoryGameSystem : MonoBehaviour
         {
             allowInput = false;
             Debug.Log("All correct");
+            SoundManager.Instance.PlaySound(soundData.GetSoundClip("Succes2"));
             memoryScoreSystem.IncreaseScore(playerNum, 1);
             userSequence.Clear();
             ButtonFeedback(buttonIndex, "Correct", true);

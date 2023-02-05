@@ -7,6 +7,8 @@ using UnityEngine.UI;
 public class ButtonSelection : MonoBehaviour
 {
     [Required] [SceneObjectsOnly] public List<Button> buttons;
+    [Required] [SerializeField] SoundController soundController;
+    [Required] [SerializeField] private Animator[] transitions;
     public int selectedButton;
     public bool isSelecting;
     public bool isVertical;
@@ -27,12 +29,20 @@ public class ButtonSelection : MonoBehaviour
         {
             if (Input.GetAxisRaw("Horizontal") != 0 && !isSelecting) StartCoroutine(SelectButton());
         }
-        
-        
-        
-        
 
-        if (Input.GetKeyDown(KeyCode.Space)|| Input.GetKeyDown(KeyCode.RightControl)) buttons[selectedButton].onClick.Invoke();
+
+
+
+
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.RightControl))
+        {
+            soundController.PlaySound("transitions");
+            foreach (var VARIABLE in transitions)
+            {
+                VARIABLE.SetTrigger("Exit");
+            }
+            buttons[selectedButton].onClick.Invoke();
+        }
     }
     private IEnumerator SelectButton()
     {
@@ -60,11 +70,13 @@ public class ButtonSelection : MonoBehaviour
             {
                 selectedButton++;
                 if (selectedButton >= buttons.Count) selectedButton = 0;
+                soundController.PlaySound("ui");
             }
             else if (Input.GetAxisRaw("Horizontal") < 0)
             {
                 selectedButton--;
                 if (selectedButton < 0) selectedButton = buttons.Count - 1;
+                soundController.PlaySound("ui");
             }
         }
 
@@ -74,11 +86,13 @@ public class ButtonSelection : MonoBehaviour
             {
                 selectedButton--;
                 if (selectedButton < 0) selectedButton = buttons.Count - 1;
+                soundController.PlaySound("ui");
             }
             else if (Input.GetAxisRaw("Vertical") < 0)
             {
                 selectedButton++;
                 if (selectedButton >= buttons.Count) selectedButton = 0;
+                soundController.PlaySound("ui");
             }
         }
     }

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -68,11 +69,6 @@ public class PressSystem : MonoBehaviour
         if (Input.GetKeyDown(key))
         {
             GetComponent<Image>().color = Color.gray;
-            audioSource.clip = pressAudio[Random.Range(0, pressAudio.Count)];
-            audioSource.Play();
-            
-            transform.localScale = new Vector3(transform.localScale.x * 1.5f ,transform.localScale.y * 1.5f, transform.localScale.z);
-            
             // change key & key sprite
             if (Random.Range(0, 100) < changeKeyRate)
             {

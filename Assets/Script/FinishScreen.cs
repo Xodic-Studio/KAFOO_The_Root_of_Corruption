@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,6 +21,8 @@ public class FinishScreen : MonoBehaviour
 
     public Vector3 backgroundBeginPosition;
     public Vector3 backgroundEndPosition;
+    [Required]
+    public SoundData soundData;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +38,7 @@ public class FinishScreen : MonoBehaviour
 
     public void ShowScreen()
     {
+        SoundManager.Instance.PlaySound(soundData.GetSoundClip("WinSound"));
         StartCoroutine(BackdropFading());
         StartCoroutine(SlideUp());
     }
