@@ -248,6 +248,7 @@ MonoBehaviour:
   - {fileID: 1058848246}
   - {fileID: 1461304614}
   - {fileID: 618819405}
+  soundController: {fileID: 20241189}
   selectedButton: 0
   isSelecting: 0
   isVertical: 0

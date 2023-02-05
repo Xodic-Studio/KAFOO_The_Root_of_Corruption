@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: Selection Scene
   m_EditorClassIdentifier: 
   musicClips:
-  - {fileID: 8300000, guid: e489180c7524bd6489ad94bc2e3e1b42, type: 3}
-  soundClips: []
+  - {fileID: 8300000, guid: 0ad013520bec5534394dc2910f20533e, type: 3}
+  soundClips:
+  - {fileID: 8300000, guid: 2172a5ddaa9c03c49a75c7d96448e4b5, type: 3}
+  - {fileID: 8300000, guid: cfaeeeaa310b880419ff5935785be5dc, type: 3}
