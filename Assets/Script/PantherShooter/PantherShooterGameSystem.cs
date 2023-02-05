@@ -1,8 +1,6 @@
-using System;
+
 using System.Collections;
-using System.Collections.Generic;
 using Sirenix.OdinInspector;
-using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;

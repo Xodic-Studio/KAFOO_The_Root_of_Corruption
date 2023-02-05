@@ -22,7 +22,7 @@ public class Bullet : MonoBehaviour
     // Update is called once per frame
     private void FixedUpdate()
     {
-        rb.velocity = Vector2.up * bulletSpeed;
+        rb.velocity = transform.right * bulletSpeed;
     }
 
     IEnumerator DestroyBullet(int waitTime)
