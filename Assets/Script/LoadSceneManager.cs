@@ -17,8 +17,13 @@ public enum SceneName
 
 public class LoadSceneManager : Singleton<LoadSceneManager>
 {
+    public bool loadingScene = false;
+    public bool finishedLoading = true;
+    private int nextSceneNumber = 0;
     public void LoadScene(SceneName sceneName)
     {
+        loadingScene = true;
+        finishedLoading = false;
         if (sceneName == SceneName.Quit)
         {
             Debug.Log("Quit");
@@ -26,8 +31,14 @@ public class LoadSceneManager : Singleton<LoadSceneManager>
         }
         else
         {
-            SceneManager.LoadScene((int)sceneName);
+            nextSceneNumber = (int)sceneName;
+            Invoke(nameof(WaifBeforeLoad), 2f);
         }
+    }
+
+    public void WaifBeforeLoad()
+    {
+        SceneManager.LoadScene((nextSceneNumber));
     }
 
     public void Quit()

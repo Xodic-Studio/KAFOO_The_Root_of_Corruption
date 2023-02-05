@@ -13,7 +13,7 @@ public enum Player
 public class MasterScript : Singleton<MasterScript>
 {
     public float timeLeft = 0f;
-    public float timeSpan = 3f;
+    public float timeSpan = 300f;
     public int p1Score = 0;
     public int p2Score = 0;
     public int winCondition;
@@ -28,6 +28,8 @@ public class MasterScript : Singleton<MasterScript>
     }
     public void StartGame()
     {
+        LoadSceneManager.Instance.loadingScene = false;
+        LoadSceneManager.Instance.finishedLoading = true;
         isGameStarted = true;
         isInGame = false;
     }
