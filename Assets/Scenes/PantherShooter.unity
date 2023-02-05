@@ -740,6 +740,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TransitionCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 8681156509738137390, guid: 892e5a8cddb9d2d4fb67035d9146b00e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 892e5a8cddb9d2d4fb67035d9146b00e, type: 3}
 --- !u!1 &486261468
