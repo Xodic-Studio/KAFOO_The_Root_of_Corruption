@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
+using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -9,9 +10,12 @@ using Random = UnityEngine.Random;
 public class PantherShooterGameSystem : MonoBehaviour
 {
     public int levelNum = 1;
+    public SoundData soundData;
     public GameObject panther, hunter;
+    public Animator hunterAnim;
     public GameObject crosshair;
     public Sprite[] swapSprites;
+    public RuntimeAnimatorController[] swapAnim;
     public GameObject finishScreenPrefab;
     public Vector3 crosshairScale;
     private GameObject canvas;
@@ -62,6 +66,7 @@ public class PantherShooterGameSystem : MonoBehaviour
         crosshairAnimator = crosshair.GetComponent<Animator>();
         crosshairCollider.enabled = false;
         pantherCollider = panther.GetComponent<BoxCollider2D>();
+        SoundManager.Instance.PlayMusic(soundData.GetMusicClip("panther_hunt"));
     }
 
     // Update is called once per frame
@@ -135,6 +140,7 @@ public class PantherShooterGameSystem : MonoBehaviour
         {
             VARIABLE.SetTrigger("Exit");
         }
+        SoundManager.Instance.StopMusic();
         LoadSceneManager.Instance.LoadScene(SceneName.Selection);
     }
     
@@ -188,6 +194,8 @@ public class PantherShooterGameSystem : MonoBehaviour
 
     IEnumerator HunterShoot()
     {
+        hunterAnim.SetTrigger("Shoot");
+        SoundManager.Instance.PlaySound(soundData.GetSoundClip("gunshot"));
         crosshairCollider.enabled = true;
         crosshairAnimator.SetTrigger("Feedback");
         yield return new WaitForSeconds(crosshairActivateTime);
@@ -214,14 +222,22 @@ public class PantherShooterGameSystem : MonoBehaviour
         flashImage.SetTrigger(Flash);
         SpriteRenderer hunterSpriteRenderer = hunter.GetComponent<SpriteRenderer>();
         SpriteRenderer pantherSpriteRenderer = panther.GetComponent<SpriteRenderer>();
+        Animator hunterAnimator = hunter.GetComponent<Animator>();
+        Animator pantherAnimator = panther.GetComponent<Animator>();
         Sprite originalHunter = hunterSpriteRenderer.sprite;
         Sprite originalPanther = pantherSpriteRenderer.sprite;
+        RuntimeAnimatorController originalHunterAC = hunterAnimator.runtimeAnimatorController;
+        RuntimeAnimatorController originalPantherAC = pantherAnimator.runtimeAnimatorController;
         hunterSpriteRenderer.sprite = swapSprites[0];
         pantherSpriteRenderer.sprite = swapSprites[1];
+        hunterAnimator.runtimeAnimatorController = swapAnim[0];
+        pantherAnimator.runtimeAnimatorController = swapAnim[1];
         yield return new WaitForSeconds(pantherSkillActivateTime);
         flashImage.SetTrigger(Flash);
         hunterSpriteRenderer.sprite = originalHunter;
         pantherSpriteRenderer.sprite = originalPanther;
+        hunterAnimator.runtimeAnimatorController = originalHunterAC;
+        pantherAnimator.runtimeAnimatorController = originalPantherAC;
         usedSwap = false;
         StartCoroutine(PantherCooldown());
     }
@@ -297,17 +313,21 @@ public class PantherShooterGameSystem : MonoBehaviour
     {
         if (usedSwap)
         {
+            SoundManager.Instance.PlaySound(soundData.GetSoundClip("foo_hurt"));
             StartCoroutine(HunterStunned());
         }
         else
         {
+            SoundManager.Instance.PlaySound(soundData.GetSoundClip("panther_hurt"));
             currentHp -= 1;
             currentHp = Mathf.Clamp(currentHp, 0, hearts.Length);
+            StartCoroutine(HitFeedback());
             hearts[currentHp].enabled = false;
         }
 
         if (currentHp <= 0)
         {
+            SoundManager.Instance.PlaySound(soundData.GetSoundClip("panther_die"));
             timeSystem.gameStart = false;
             GameObject finishScreen = Instantiate(finishScreenPrefab, canvas.transform);
             FinishScreen finishScreenSystem = finishScreen.GetComponent<FinishScreen>();
@@ -317,5 +337,12 @@ public class PantherShooterGameSystem : MonoBehaviour
             MasterScript.Instance.minigamePlayCount[3]++;
             Invoke(nameof(ToSelectScene),5);
         }
+    }
+
+    IEnumerator HitFeedback()
+    {
+        panther.GetComponent<SpriteRenderer>().color = Color.red;
+        yield return new WaitForSeconds(0.5f);
+        panther.GetComponent<SpriteRenderer>().color = Color.white;
     }
 }
