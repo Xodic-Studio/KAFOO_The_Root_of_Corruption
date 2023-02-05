@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public enum SceneName
 {
     Menu,
+    Trailer,
     Selection,
     RabbitPress,
     VampireSurvival,
