@@ -21,6 +21,7 @@ public class VampireSurvivorsGameManager : MonoBehaviour
     public int popUpImageIndex = 0;
     private GameObject canvas;
     private bool popUped;
+    public Animator[] transitions;
 
 
 
@@ -104,6 +105,10 @@ public class VampireSurvivorsGameManager : MonoBehaviour
     
     void ToSelectScene()
     {
+        foreach (var VARIABLE in transitions)
+        {
+            VARIABLE.SetTrigger("Exit");
+        }
         LoadSceneManager.Instance.LoadScene(SceneName.Selection);
     }
 }

@@ -28,6 +28,7 @@ public class RappitPressGameManager : MonoBehaviour
     public TutorialImage tutorialImageSO;
     private bool popUped;
     public int popUpImageIndex = 0;
+    public Animator[] transitions;
 
     private void Start()
     {
@@ -128,6 +129,10 @@ public class RappitPressGameManager : MonoBehaviour
 
     void ToSelectScene()
     {
+        foreach (var VARIABLE in transitions)
+        {
+            VARIABLE.SetTrigger("Exit");
+        }
         LoadSceneManager.Instance.LoadScene(SceneName.Selection);
     }
 }

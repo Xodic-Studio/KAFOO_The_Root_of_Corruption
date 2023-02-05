@@ -913,6 +913,9 @@ MonoBehaviour:
   popUpPrefab: {fileID: 6604063561081856403, guid: 8727c19f6bcbe804595113b76549d386, type: 3}
   tutorialImageSO: {fileID: 11400000, guid: c12be65203cc29746b5af74b4e4fb31b, type: 2}
   popUpImageIndex: 0
+  transitions:
+  - {fileID: 700370022}
+  - {fileID: 700370021}
 --- !u!4 &338427859
 Transform:
   m_ObjectHideFlags: 0
