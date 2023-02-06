@@ -7,7 +7,7 @@ public class Bgm : MonoBehaviour
     [SerializeField] private SoundData soundData;
     void Start()
     {
-        SoundManager.Instance.PlaySound(soundData.GetSoundClip("vampire"));
+        SoundManager.Instance.PlayMusic(soundData.GetMusicClip("vampire"));
     }
 
 }

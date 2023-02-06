@@ -28,4 +28,12 @@ public class SimLoad : MonoBehaviour
         Invoke("LoadScene",2f);
 
     }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            LoadScene();
+        }
+    }
 }

@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6ad654d4ad5bcc42b4075f0f31514c2, type: 3}
   m_Name: VPS
   m_EditorClassIdentifier: 
-  musicClips: []
+  musicClips:
+  - {fileID: 8300000, guid: 45f5af0dc09e5af4d90c64176a183a17, type: 3}
   soundClips:
   - {fileID: 8300000, guid: 92328fa22f45c154683f5d99657a1035, type: 3}
   - {fileID: 8300000, guid: 92328fa22f45c154683f5d99657a1035, type: 3}
@@ -23,4 +24,3 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 91f848d7e5bc3c944b1ef5585be0d2d0, type: 3}
   - {fileID: 8300000, guid: 4f6bc84ff11ec61449c52e502604f346, type: 3}
   - {fileID: 8300000, guid: 1934fcd290026654fa169c918651ba23, type: 3}
-  - {fileID: 8300000, guid: 45f5af0dc09e5af4d90c64176a183a17, type: 3}
