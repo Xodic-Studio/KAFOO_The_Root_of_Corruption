@@ -11,8 +11,8 @@ public enum SceneName
     VampireSurvival,
     MemoryGame,
     PantherShooter,
-    EndSceneGood,
     EndSceneBad,
+    EndSceneGood,
     Credit,
     Quit,
 }
@@ -34,7 +34,7 @@ public class LoadSceneManager : Singleton<LoadSceneManager>
         {
             nextSceneNumber = (int)sceneName;
             
-            Invoke(nameof(WaifBeforeLoad), 2f);
+            Invoke(nameof(WaifBeforeLoad), 0f);
         }
     }
 

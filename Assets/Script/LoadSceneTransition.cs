@@ -15,7 +15,13 @@ public class LoadSceneTransition : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!LoadSceneManager.Instance.loadingScene) return;
+        
+        /* For transition scope back
+        if (!LoadSceneManager.Instance.loadingScene)
+        {
+            return;
+        }
+
         if (!exited)
         {
             gameObject.SetActive(true);
@@ -25,7 +31,7 @@ public class LoadSceneTransition : MonoBehaviour
             }
             exited = true;
         }
-
+        */
     }
 
     IEnumerator PlayTransition(Animator animator)

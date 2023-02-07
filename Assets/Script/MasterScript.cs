@@ -13,7 +13,7 @@ public enum Player
 public class MasterScript : Singleton<MasterScript>
 {
     public float timeLeft = 0f;
-    public float timeSpan = 300f;
+    public float timeSpan = 1000f;
     public int p1Score = 0;
     public int p2Score = 0;
     public int winCondition;
@@ -83,7 +83,8 @@ public class MasterScript : Singleton<MasterScript>
             SoundManager.Instance.StopMusic();
             LoadSceneManager.Instance.LoadScene(SceneName.EndSceneBad);
         }
-
+        
+        Debug.Log($"P1 : {p1Score} / P2 : {p2Score}");
         if (isGameStarted) isGameStarted = false;
         ResetValues();
     }

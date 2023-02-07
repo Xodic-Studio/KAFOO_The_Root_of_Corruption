@@ -86,6 +86,7 @@ public class PressSystem : MonoBehaviour
             }
             PlayOneEffect();
             pressCount++;
+            transform.localScale = transform.localScale * 1.2f;
             SoundManager.Instance.PlaySound(soundData.GetSoundClip("foo_correct"));
             comboParticlePlayed = false;
         }

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Level1
   m_EditorClassIdentifier: 
   level: 1
-  speed: 1
+  speed: 2
   sprite: {fileID: -172339963, guid: 2e29aae91ae1a7641b4325926c6bea28, type: 3}
   hp: 1
   cost: 2
